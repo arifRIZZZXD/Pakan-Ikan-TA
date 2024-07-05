@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+
     public function index()
     {
+
         $latestSensorData = Sensor::orderBy('created_at', 'desc')->first();
 
         // Ambil hanya 10 data terbaru dari tabel 'sensors'

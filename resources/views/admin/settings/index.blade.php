@@ -27,7 +27,7 @@
                                     <td>09:00 AM</td>
                                     <td>01:00 PM</td>
                                     <td>04:00 PM</td>
-                                    <td><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></button></td>
+                                    <td><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square"></i></button></td>
                                     {{-- Modal JadwalPakan --}}
                                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -35,26 +35,26 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
+                                                </div>
                                             <div class="modal-body">
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="Pakan1">Pakan Ke-1</label>
-                                                                <input class="form-control" type="text" id="time1" name="time1" value="" id="html5-time-input" />
+                                                                <input class="form-control" type="time" name="time1" value="" id="html5-time-input" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="Pakan2">Pakan Ke-2</label>
-                                                                <input class="form-control flatpickr-time" type="text" id="time2" name="time2" value="" id="html5-time-input" />
+                                                                <input class="form-control" type="time" name="time2" value="" id="html5-time-input" />
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="Pakan3">Pakan Ke-3</label>
-                                                                <input class="form-control" type="text" id="time3" name="time3" value="" id="html5-time-input" />
+                                                                <input class="form-control" type="time" name="time3" value="" id="html5-time-input" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -95,66 +95,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($settingDatas as $data)
                                 <tr>
-                                    <td>20 °C</td>
-                                    <td>35 °C</td>
-                                    <td>6.5</td>
-                                    <td>8.0</td>
-                                    <td>20%</td>
-                                    <td><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square" data-bs-toggle="modal" data-bs-target="#staticBackdropSettings"></i></button></td>
-                                    {{-- Modal JadwalPakan --}}
-                                    <div class="modal fade" id="staticBackdropSettings" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="staticBackdropLabel">Edit Pengaturan Alat</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="Pakan1">Minimal Suhu</label>
-                                                                <input class="form-control" type="text" placeholder="Masukan data..."/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="Pakan2">Maksimal Suhu</label>
-                                                                <input class="form-control" type="text" placeholder="Masukan data..."/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="Pakan1">Minimal Kadar Ph</label>
-                                                                <input class="form-control" type="text" placeholder="Masukan data..."/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="Pakan2">Maksimal Kadar PH</label>
-                                                                <input class="form-control" type="text" placeholder="Masukan data..."/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="Pakan3">Minimal Pakan</label>
-                                                                <input class="form-control" type="text" placeholder="Masukan data..."/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-success">Submit</button>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    {{-- End Modal Jadwal Pakan --}}
+                                    <td>{{ $data->tempMin }} <span>°C</span></td>
+                                    <td>{{ $data->tempMax }} <span>°C</span></td>
+                                    <td>{{ $data->phMin }} </td>
+                                    <td>{{ $data->phMax }} </td>
+                                    <td>{{ $data->feedMin }} <span>%</span></td>
+                                    <td>
+                                        <a href="{{ route('settings.editSettings', $data->id) }}"><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square"></i></button></a>
+                                    </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -220,4 +172,15 @@
             </div>
     </div>
 </div>
+@endsection
+
+@section('css')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    
+</script>
 @endsection
