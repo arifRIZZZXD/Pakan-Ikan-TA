@@ -24,9 +24,14 @@ class LoginController extends Controller
         ];
 
         if(Auth::attempt($data)){
-            return redirect()->route('dashboard');
+            return redirect()->intended('dashboard');
         } else {
             return redirect()->route('login')->with('failed', 'Email atau password salah');
         }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Kamu berhasil logout');
     }
 }

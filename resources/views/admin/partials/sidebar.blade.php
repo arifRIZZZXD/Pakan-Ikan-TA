@@ -35,13 +35,13 @@
             <h4 class="text-section">MENU</h4>
           </li>
           <li class="nav-item">
-            <a href="jadwalPakan">
+            <a href="{{ route('settings.index') }}">
               <i class="fas fa-cog"></i>
               <p>Settings Alat</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="laporan">
+            <a href="report">
               <i class="fas fa-file-alt"></i>
               <p>Laporan</p>
             </a>
@@ -50,6 +50,7 @@
             <a href="notification">
               <i class="fas fa-bell"></i>
               <p>Notifikasi</p>
+              <i class="fas fa-circle text-danger position-absolute end-0"></i>
             </a>
           </li>
         </ul>
