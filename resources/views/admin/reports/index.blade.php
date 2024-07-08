@@ -36,7 +36,7 @@
                               <td>2024/06/13</td>
                               <td>3</td>
                               <td><span class="badge badge-success">Safe</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>2</td>
@@ -46,7 +46,7 @@
                               <td>2024/06/14</td>
                               <td>2</td>
                               <td><span class="badge badge-warning">Warning</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>3</td>
@@ -56,7 +56,7 @@
                               <td>2024/006/15</td>
                               <td>5</td>
                               <td><span class="badge badge-danger">Danger</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>4</td>
@@ -66,7 +66,7 @@
                               <td>2024/06/16</td>
                               <td>3</td>
                               <td><span class="badge badge-success">Safe</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>5</td>
@@ -76,7 +76,7 @@
                               <td>2024/06/13</td>
                               <td>3</td>
                               <td><span class="badge badge-success">Safe</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>6</td>
@@ -86,7 +86,7 @@
                               <td>2024/06/14</td>
                               <td>2</td>
                               <td><span class="badge badge-warning">Warning</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>7</td>
@@ -96,7 +96,7 @@
                               <td>2024/006/15</td>
                               <td>5</td>
                               <td><span class="badge badge-danger">Danger</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>8</td>
@@ -106,7 +106,7 @@
                               <td>2024/06/16</td>
                               <td>3</td>
                               <td><span class="badge badge-success">Safe</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>9</td>
@@ -116,7 +116,7 @@
                               <td>2024/06/13</td>
                               <td>3</td>
                               <td><span class="badge badge-success">Safe</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>10</td>
@@ -126,7 +126,7 @@
                               <td>2024/06/14</td>
                               <td>2</td>
                               <td><span class="badge badge-warning">Warning</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>11</td>
@@ -136,7 +136,7 @@
                               <td>2024/006/15</td>
                               <td>5</td>
                               <td><span class="badge badge-danger">Danger</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                             <tr>
                               <td>12</td>
@@ -146,7 +146,7 @@
                               <td>2024/06/16</td>
                               <td>3</td>
                               <td><span class="badge badge-success">Safe</span></td>
-                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-receipt"></i></button></a></td>
+                              <td><a href="detailLaporan"><button class="btn btn-dark btn-sm"><i class="fas fa-solid fa-download"></i></button></a></td>
                             </tr>
                           </tbody>
                         </table>

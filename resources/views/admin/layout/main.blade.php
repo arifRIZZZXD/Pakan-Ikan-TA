@@ -9,7 +9,7 @@
     />
     <link
         rel="icon"
-        href="{{ asset('assets/img/kaiadmin/favicon.icon') }}"
+        href="{{ asset('assets/img/kaiadmin/favicon.ico') }}"
       type="image/x-icon"
     />
 
@@ -25,7 +25,7 @@
             "Font Awesome 5 Brands",
             "simple-line-icons",
           ],
-          urls: [" {{ asset('assets/css/fonts.min.css') }}"],
+          urls: ["assets/css/fonts.min.css"],
         },
         active: function () {
           sessionStorage.fonts = true;
@@ -33,6 +33,7 @@
       });
     </script>
 
+    <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/plugins.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
@@ -68,8 +69,8 @@
         <!-- End Body -->
       </div>
 
-      <!-- Custom template | don't include it in your project! -->
-      {{-- <div class="custom-template">
+      {{-- <!-- Custom template | don't include it in your project! -->
+      <div class="custom-template">
         <div class="title">Settings</div>
         <div class="custom-content">
           <div class="switcher">
@@ -303,13 +304,6 @@
 
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="{{ asset('assets/js/setting-demo2.js') }}"></script>
-    <script>
-      $(document).ready(function () {
-        $("#basic-datatables").DataTable({});
-
-      });
-
-    </script>
 
   </body>
 </html>
