@@ -23,7 +23,7 @@
       <div class="sidebar-content">
         <ul class="nav nav-secondary">
           <li class="nav-item">
-            <a href="dashboard">
+            <a href="{{ route('dashboard.index') }}">
               <i class="fas fa-chart-bar"></i>
               <p>Dashboard</p>
             </a>
@@ -37,17 +37,29 @@
           <li class="nav-item">
             <a href="{{ route('settings.index') }}">
               <i class="fas fa-cog"></i>
-              <p>Settings Alat</p>
+              <p>Settings Tools</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="report">
+            <a href="{{ route('device.index') }}">
+              <i class="fas fa-cog"></i>
+              <p>Device</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('feedSchedules.index') }}">
+              <i class="fas fa-cog"></i>
+              <p>Feed Schedules</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('report.index') }}">
               <i class="fas fa-file-alt"></i>
-              <p>Laporan</p>
+              <p>Report</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="notification">
+            <a href="{{ route('notification.index') }}">
               <i class="fas fa-bell"></i>
               <p>Notifikasi</p>
               <i class="fas fa-circle text-danger position-absolute end-0"></i>

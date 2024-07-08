@@ -30,7 +30,7 @@
                 <div class="col col-stats ms-3 ms-sm-0">
                   <div class="numbers">
                     <p class="card-category">Suhu</p>
-                    <h4 class="card-title"><span>{{ $latestSensorData->suhu }}</span><span> °C</span> </h4>
+                    <h4 class="card-title" id="suhu"><span>{{ $latestSensorData->suhu }}</span><span> °C</span> </h4>
                   </div>
                 </div>
               </div>
@@ -51,7 +51,7 @@
                 <div class="col col-stats ms-3 ms-sm-0">
                   <div class="numbers">
                     <p class="card-category">Kadar Air</p>
-                    <h4 class="card-title"><span>{{ $latestSensorData->ph }}</span></h4>
+                    <h4 class="card-title" id="ph"><span>{{ $latestSensorData->ph }}</span></h4>
                   </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@
                 <div class="col col-stats ms-3 ms-sm-0">
                   <div class="numbers">
                     <p class="card-category">Jumlah Pakan</p>
-                    <h4 class="card-title"><span>{{ $latestSensorData->pakan }}</span><span>%</span></h4>
+                    <h4 class="card-title" id="pakan"><span>{{ $latestSensorData->pakan }}</span><span>%</span></h4>
                   </div>
                 </div>
               </div>
@@ -195,4 +195,15 @@
       });
   });
 </script>
+
+<script>
+  $(document).ready( function(){
+    setInterval( function() {
+    $.ajax({
+      $("suhu").load("{{ url('readSuhu') }}");
+      $("ph").load("{{ url('readPh') }}");
+      $("pakan").load("{{ url('readPakan') }}");
+    });
+    }, 1000);
+  });
 @endsection
