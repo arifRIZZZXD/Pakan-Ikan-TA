@@ -7,10 +7,8 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-
     public function index()
     {
-
         $latestSensorData = Sensor::orderBy('created_at', 'desc')->first();
 
         // Ambil hanya 10 data terbaru dari tabel 'sensors'
@@ -48,6 +46,46 @@ class DashboardController extends Controller
             ],
         ];
         
-        return view('admin.dashboards.index', compact('data1','data2', 'latestSensorData'));
+        return view('admin.dashboards.index', compact('data1', 'data2', 'latestSensorData'));
+    }
+
+    public function getLatestSensorData()
+    {
+        $latestSensorData = Sensor::orderBy('created_at', 'desc')->first();
+        $sales = Sensor::orderBy('created_at', 'desc')->take(10)->get()->sortBy('created_at');
+
+        $data1 = [
+            'labels' => $sales->pluck('created_at')->map(function ($date) {
+                return $date->format('H:i:s');
+            }),
+            'datasets' => [
+                [
+                    'label' => 'Suhu',
+                    'backgroundColor' => 'rgba(0, 0, 0, 0)',
+                    'borderColor' => 'rgba(255, 99, 132, 1)',
+                    'data' => $sales->pluck('suhu'),
+                ],
+            ],
+        ];
+
+        $data2 = [
+            'labels' => $sales->pluck('created_at')->map(function ($date) {
+                return $date->format('H:i:s');
+            }),
+            'datasets' => [
+                [
+                    'label' => 'ph',
+                    'backgroundColor' => 'rgba(0, 0, 0, 0)',
+                    'borderColor' => 'rgba(0, 0, 255, 0.6)',
+                    'data' => $sales->pluck('ph'),
+                ],
+            ],
+        ];
+
+        return response()->json([
+            'latestSensorData' => $latestSensorData,
+            'data1' => $data1,
+            'data2' => $data2,
+        ]);
     }
 }

@@ -80,7 +80,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      {{-- <div class="row">
         <div class="col-sm-6 col-md-6">
           <div class="card card-stats card-round">
             <div class="card-body">
@@ -123,7 +123,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -195,15 +195,44 @@
       });
   });
 </script>
-
 <script>
-  $(document).ready( function(){
-    setInterval( function() {
-    $.ajax({
-      $("suhu").load("{{ url('readSuhu') }}");
-      $("ph").load("{{ url('readPh') }}");
-      $("pakan").load("{{ url('readPakan') }}");
-    });
-    }, 1000);
+  $(document).ready(function () {
+      const suhuChartCtx = document.getElementById('myChart').getContext('2d');
+      const phChartCtx = document.getElementById('myChartPh').getContext('2d');
+
+      let suhuChart = new Chart(suhuChartCtx, {
+          type: 'line',
+          data: @json($data1),
+          options: {}
+      });
+
+      let phChart = new Chart(phChartCtx, {
+          type: 'line',
+          data: @json($data2),
+          options: {}
+      });
+
+      function fetchLatestData() {
+          $.ajax({
+              url: '/get-latest-sensor-data',
+              method: 'GET',
+              success: function (response) {
+                  $('#suhu span').first().text(response.latestSensorData.suhu);
+                  $('#ph span').first().text(response.latestSensorData.ph);
+                  $('#pakan span').first().text(response.latestSensorData.pakan);
+
+                  suhuChart.data.labels = response.data1.labels;
+                  suhuChart.data.datasets[0].data = response.data1.datasets[0].data;
+                  suhuChart.update();
+
+                  phChart.data.labels = response.data2.labels;
+                  phChart.data.datasets[0].data = response.data2.datasets[0].data;
+                  phChart.update();
+              }
+          });
+      }
+
+      setInterval(fetchLatestData, 1000);
   });
+</script>
 @endsection

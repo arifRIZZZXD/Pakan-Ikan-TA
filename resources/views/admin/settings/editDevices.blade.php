@@ -43,10 +43,56 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-success" id="alert_demo_7">Submit</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $("#alert_demo_7").click(function (e) {
+        e.preventDefault();
+        swal({
+            title: "Apakah ingin merubah Jadwal Pakan?",
+            text: "Anda tidak akan dapat mengembalikannya!",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "Batal",
+                    value: null,
+                    visible: true,
+                    className: "btn btn-danger",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Ya, ubah!",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-success",
+                    closeModal: true,
+                }
+            }
+        }).then((willDelete) => {
+            if (willDelete) {
+                swal({
+                    title: "Diubah!",
+                    text: "Selamat, data berhasil diubah!",
+                    icon: "success",
+                    buttons: {
+                        confirm: {
+                            className: "btn btn-success",
+                        },
+                    },
+                }).then(() => {
+                    $("#editForm").submit();
+                });
+            } else {
+                swal.close();
+            }
+        });
+    });
+</script>
 @endsection
