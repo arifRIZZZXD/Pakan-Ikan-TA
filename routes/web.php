@@ -27,31 +27,45 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Login and Logout routes
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/loginProses', [LoginController::class, 'auth'])->name('loginProses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], function(){
-// });
+// Route Jika Sudah Login
 Route::middleware(['auth'])->group(function () {
-    Route::resource('dashboard', DashboardController::class); 
+
+    // Dashboard routes
+    Route::resource('dashboard', DashboardController::class);
+    Route::get('/get-latest-sensor-data', [DashboardController::class, 'getLatestSensorData']);
+
+    // Settings routes
     Route::get('settings', [SettingDataController::class, 'index'])->name('settings.index');
     Route::get('settings/{id}/edit', [SettingDataController::class, 'edit'])->name('settings.editSettings');
     Route::put('settings/{id}', [SettingDataController::class, 'update'])->name('settings.update');
-    
+
+    // Feed Schedule routes
     Route::get('feedSchedules', [FeedSchedulesController::class, 'index'])->name('feedSchedules.index');
     Route::get('feedSchedules/{id}/edit', [FeedSchedulesController::class, 'edit'])->name('feedSchedules.edit');
     Route::put('feedSchedules/{id}', [FeedSchedulesController::class, 'update'])->name('feedSchedules.update');
-    
+
+    // Device routes
     Route::get('devices', [DeviceController::class, 'index'])->name('device.index');
 
+    // Report routes
     Route::get('report',[ReportsController::class, 'index'])->name('report.index');
+
+    // Notifications routes
     Route::get('notification',[NotificationsController::class, 'index'])->name('notification.index');
+    Route::get('notification/data',[NotificationsController::class, 'getData'])->name('notification.data');
+    Route::delete('notification/{id}', [NotificationsController::class, 'destroy'])->name('notification.destroy');
+
 });
 
-
-// Route::get('setting',[SettingToolsController::class , 'index'])->name('setting');
-// // Route::resource('setting',[SettingToolsController::class])->only('index', 'update');
-// Route::get('setting',[SettingToolsController::class , 'update']);
-
-
+Route::fallback(function () {
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    } else {
+        return redirect()->route('login');
+    }
+});

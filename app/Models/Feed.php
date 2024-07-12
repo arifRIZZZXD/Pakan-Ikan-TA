@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Device extends Model
+class Feed extends Model
 {
     use HasFactory;
-    protected $table = 'devices';
+    protected $primaryKey = 'id';
+    protected $table = 'feeds';
     protected $fillable = [
-        'noDevices',
-        'lastActive_at',
-        'lastChecked_at',
-        'isActive',
+        'feedStatus'
     ];
 }

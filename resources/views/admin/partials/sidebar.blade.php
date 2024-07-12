@@ -42,13 +42,13 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('device.index') }}">
-              <i class="fas fa-cog"></i>
+              <i class="fas fa-cogs"></i>
               <p>Device</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{ route('feedSchedules.index') }}">
-              <i class="fas fa-cog"></i>
+              <i class="fas fa-calendar-alt"></i>
               <p>Feed Schedules</p>
             </a>
           </li>
