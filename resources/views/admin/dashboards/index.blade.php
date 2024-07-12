@@ -80,22 +80,28 @@
           </div>
         </div>
       </div>
-      {{-- <div class="row">
+      <div class="row">
         <div class="col-sm-6 col-md-6">
           <div class="card card-stats card-round">
             <div class="card-body">
               <div class="row align-items-center">
                 <div class="col-icon">
-                  <div class="icon-big text-center icon-danger bubble-shadow-small">
-                    <i class="fas fa-thermometer-half"></i>
+                  <div class="icon-big text-center icon-warning bubble-shadow-small">
+                    <i class="fas fa-clock"></i>
                   </div>
                 </div>
                 <div class="col col-stats ms-3 ms-sm-0">
                   <div class="numbers">
-                    <p class="card-category">Nyalakan pendingin jika air di atas 32 °C</p>
-                    <div class="form-check form-switch card-title">
-                      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    </div>
+                    <p class="card-category">Jadwal Pakan Selanjutnya</p>
+                      <h4 class="card-title">
+                        @if($nextFeedSchedule === 'sudah tidak ada')
+                          <span>Sudah tidak ada</span>
+                        @elseif($nextFeedSchedule)
+                          <span>{{ $nextFeedSchedule->format('H:i') }} WIB</span>
+                        @else
+                          <span>Jadwal tidak tersedia</span>
+                        @endif
+                      </h4>
                   </div>
                 </div>
               </div>
@@ -107,23 +113,21 @@
             <div class="card-body">
               <div class="row align-items-center">
                 <div class="col-icon">
-                  <div
-                    class="icon-big text-center icon-success bubble-shadow-small"
-                  >
-                    <i class="fas fa-battery-full"></i>
+                  <div class="icon-big text-center icon-primary bubble-shadow-small">
+                    <i class="fas fa-calendar-alt"></i>
                   </div>
                 </div>
                 <div class="col col-stats ms-3 ms-sm-0">
                   <div class="numbers">
-                    <p class="card-category">Klik button jika ingin beri pakan manual</p>
-                    <div class="card-title"><button class="btn btn-success btn-sm">Beri Pakan</button></div>
+                    <p class="card-category">Tanggal</p>
+                    <h4 class="card-title"><span>{{ now()->format('d M Y') }}</span></h4>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div> --}}
+      </div>
       <div class="row">
         <div class="col-md-12">
           <div class="card">

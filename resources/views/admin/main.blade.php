@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/kaiadmin.min.css') }}" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
     {{-- Jquery --}}
     <script type="text/javascript" src="{{ asset('assets/jquery/jquery.min.js') }}"></script>

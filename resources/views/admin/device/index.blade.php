@@ -31,7 +31,7 @@
                                     <span class="badge badge-success">Terhubung</span>
                                     <span class="badge badge-danger">Terputus</span>
                                 </td>
-                                <td><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square" data-bs-toggle="modal" data-bs-target="#staticBackdropDevices"></i></button></td>
+                                <td><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square"></i></button></td>
                             </tr>
                         </tbody>
                     </table>

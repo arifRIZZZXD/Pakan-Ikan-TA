@@ -25,7 +25,7 @@
                             <input class="form-control" type="time" name="time3" value="{{ sprintf('%02d', $feedSchedules->jam3) }}:{{ sprintf('%02d', $feedSchedules->menit3) }}">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success mt-3" id="alert_demo_7">Submit</button>
+                    <button type="submit" class="btn btn-success mt-3">Submit</button>
                     <a href="{{ route('feedSchedules.index') }}"><button type="button" class="btn btn-danger mt-3">Close</button></a>
                 </form>
             </div>
@@ -38,7 +38,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.18/jquery.timepicker.min.js"></script>
 @endsection
 
-@section('scripts')
 <script>
     $("#alert_demo_7").click(function (e) {
         e.preventDefault();
@@ -82,4 +81,3 @@
         });
     });
 </script>
-@endsection

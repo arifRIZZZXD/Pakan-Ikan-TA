@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeedSchedules;
-use Illuminate\Support\Facades\Request;
-use App\Http\Requests\StoreFeedSchedulesRequest;
-use App\Http\Requests\UpdateFeedSchedulesRequest;
 
 class FeedSchedulesController extends Controller
 {

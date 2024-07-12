@@ -57,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Notifications routes
     Route::get('notification',[NotificationsController::class, 'index'])->name('notification.index');
+    Route::get('notification/data',[NotificationsController::class, 'getData'])->name('notification.data');
+    Route::delete('notification/{id}', [NotificationsController::class, 'destroy'])->name('notification.destroy');
 
 });
 
