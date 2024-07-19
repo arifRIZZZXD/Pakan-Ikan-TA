@@ -23,9 +23,9 @@ use App\Models\FeedSchedules;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Login and Logout routes
 Route::get('/login', [LoginController::class, 'index'])->name('login');

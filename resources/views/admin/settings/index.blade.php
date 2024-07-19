@@ -29,7 +29,7 @@
                                     <td>{{ $data->tempMax }} <span>°C</span></td>
                                     <td>{{ $data->phMin }} </td>
                                     <td>{{ $data->phMax }} </td>
-                                    <td>{{ $data->feedMin }} <span>%</span></td>
+                                    <td>{{ $data->feedMin }} </td>
                                     <td>
                                         <a href="{{ route('settings.editSettings', $data->id) }}"><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square"></i></button></a>
                                     </td>

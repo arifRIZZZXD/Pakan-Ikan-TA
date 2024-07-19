@@ -72,7 +72,7 @@
               </form>
             </ul>
           </li>
-          <li class="nav-item topbar-icon dropdown hidden-caret">
+          {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -149,7 +149,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
 
           <li class="nav-item topbar-user dropdown hidden-caret">
             <a
