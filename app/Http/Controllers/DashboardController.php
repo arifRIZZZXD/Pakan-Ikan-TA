@@ -6,12 +6,14 @@ use Carbon\Carbon;
 use App\Models\Sensor;
 use Illuminate\Http\Request;
 use App\Models\FeedSchedules;
+use App\Models\SettingData;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         $latestSensorData = Sensor::orderBy('created_at', 'desc')->first();
+        $feedMin = SettingData::first()->feedMin;  // Mengambil nilai feedMin
 
         // Ambil hanya 10 data terbaru dari tabel 'sensors'
         $sales = Sensor::orderBy('created_at', 'desc')->take(10)->get();
@@ -40,7 +42,7 @@ class DashboardController extends Controller
             }),
             'datasets' => [
                 [
-                    'label' => 'ph',
+                    'label' => 'pH',
                     'backgroundColor' => 'rgba(0, 0, 0, 0)',
                     'borderColor' => 'rgba(0, 0, 255, 0.6)',
                     'data' => $sales->pluck('ph'),
@@ -51,7 +53,7 @@ class DashboardController extends Controller
         // Ambil jadwal pakan selanjutnya
         $nextFeedSchedule = $this->getNextFeedSchedule();
 
-        return view('admin.dashboards.index', compact('data1', 'data2', 'latestSensorData', 'nextFeedSchedule'));
+        return view('admin.dashboards.index', compact('data1', 'data2', 'latestSensorData', 'nextFeedSchedule', 'feedMin'));
     }
 
     private function getNextFeedSchedule()
@@ -79,6 +81,7 @@ class DashboardController extends Controller
     public function getLatestSensorData()
     {
         $latestSensorData = Sensor::orderBy('created_at', 'desc')->first();
+        $feedMin = SettingData::first()->feedMin;  // Mengambil nilai feedMin
         $sales = Sensor::orderBy('created_at', 'desc')->take(10)->get()->sortBy('created_at');
 
         $data1 = [
@@ -101,7 +104,7 @@ class DashboardController extends Controller
             }),
             'datasets' => [
                 [
-                    'label' => 'ph',
+                    'label' => 'pH',
                     'backgroundColor' => 'rgba(0, 0, 0, 0)',
                     'borderColor' => 'rgba(0, 0, 255, 0.6)',
                     'data' => $sales->pluck('ph'),
@@ -113,6 +116,7 @@ class DashboardController extends Controller
             'latestSensorData' => $latestSensorData,
             'data1' => $data1,
             'data2' => $data2,
+            'feedMin' => $feedMin,  // Sertakan nilai feedMin dalam respons JSON
         ]);
     }
 }
