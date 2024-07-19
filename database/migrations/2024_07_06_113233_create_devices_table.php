@@ -12,16 +12,16 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('devices', function (Blueprint $table) {
-            $table->id();
-            $table->string('device_key')->unique(); // Kunci perangkat harus unik
-            $table->timestamp('lastActive_at');
-            $table->timestamp('lastChecked_at');
-            $table->tinyInteger('isActive');
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('devices', function (Blueprint $table) {
+        $table->id();
+        $table->string('device_key')->unique(); // Kunci perangkat harus unik
+        $table->timestamp('lastActive_at')->nullable();
+        $table->timestamp('lastChecked_at')->nullable();
+        $table->tinyInteger('isActive');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
