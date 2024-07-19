@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feed_schedules', function (Blueprint $table) {
+        Schema::create('sensors', function (Blueprint $table) {
             $table->id();
-            $table->integer('jam1');
-            $table->integer('menit1');
-            $table->integer('jam2');
-            $table->integer('menit2');
-            $table->integer('jam3');
-            $table->integer('menit3');
+            $table->decimal('suhu');
+            $table->decimal('ph');
+            $table->integer('pakan');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('feed_schedules');
+        Schema::dropIfExists('sensors');
     }
 };
