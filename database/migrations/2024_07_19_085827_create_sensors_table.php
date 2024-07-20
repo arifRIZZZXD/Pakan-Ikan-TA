@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('sensors', function (Blueprint $table) {
             $table->id();
-            $table->decimal('suhu');
-            $table->decimal('ph');
+            $table->decimal('suhu', 8,0);
+            $table->decimal('ph', 8,1);
             $table->integer('pakan');
             $table->timestamps();
         });

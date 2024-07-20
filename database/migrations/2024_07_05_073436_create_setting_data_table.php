@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('setting_datas', function (Blueprint $table) {
             $table->id();
-            $table->decimal('tempMin');
-            $table->decimal('tempMax');
-            $table->decimal('phMin');
-            $table->decimal('phMax');
+            $table->decimal('tempMin', 8,0);
+            $table->decimal('tempMax', 8,0);
+            $table->decimal('phMin', 8,1);
+            $table->decimal('phMax', 8,1);
             $table->decimal('feedMin');
             $table->timestamps();
         });

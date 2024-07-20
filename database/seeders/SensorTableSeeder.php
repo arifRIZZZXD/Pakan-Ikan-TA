@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class FeedSchedulesSeeder extends Seeder
+class SensorTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,14 +14,11 @@ class FeedSchedulesSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            'jam1' => 7,
-            'menit1' => 35,
-            'jam2' => 12,
-            'menit2' => 45,
-            'jam3' => 18,
-            'menit3' => 35,
+            'suhu' => 30,
+            'pH' => 6,3,
+            'pakan' => 6.0,
         ];
 
-        DB::table('feed_schedules')->insert($data);
+        DB::table('sensors')->insert($data);
     }
 }
