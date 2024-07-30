@@ -14,11 +14,11 @@
                         <table class="table mt-2">
                             <thead>
                                 <tr>
-                                    <th>Minimal Suhu</th>
-                                    <th>Maksimal Suhu</th>
+                                    <th>Minimal temp</th>
+                                    <th>Maksimal temp</th>
                                     <th>Minimal Kadar Ph</th>
                                     <th>Maksimal Kadar Ph</th>
-                                    <th>Miksimal Pakan</th>
+                                    <th>Miksimal feed</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

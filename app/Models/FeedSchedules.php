@@ -10,6 +10,6 @@ class FeedSchedules extends Model
     use HasFactory;
     protected $table = 'feed_schedules';
     protected $fillable = [
-        'jam1', 'menit1', 'jam2', 'menit2', 'jam3', 'menit3'
+        'hourOne', 'minuteOne', 'hourTwo', 'minuteTwo', 'hourThree', 'minuteThree'
     ];
 }

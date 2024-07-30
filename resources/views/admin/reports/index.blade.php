@@ -27,8 +27,8 @@
                                     @foreach($reports as $report)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $report->average_temperature }} °C</td>
-                                        <td>{{ $report->average_ph }}</td>
+                                        <td>{{ $report->avgTemp }} °C</td>
+                                        <td>{{ $report->avgPh }}</td>
                                         <td>
                                             <span class="badge {{ $report->feedStatusBadge($feedMax) }}">
                                                 {{ $report->feedStatusText($feedMax) }}
@@ -79,7 +79,7 @@
                                         <td>
                                             @if($weeklyReport['averageFeed'] !== null)
                                                 <span class="badge {{ $weeklyReport['averageFeed'] > $feedMax ? 'badge-danger' : 'badge-success' }}">
-                                                    {{ $weeklyReport['averageFeed'] > $feedMax ? 'Pakan Hampir Habis' : 'Pakan Tersedia' }}
+                                                    {{ $weeklyReport['averageFeed'] > $feedMax ? 'feed Hampir Habis' : 'feed Tersedia' }}
                                                 </span>
                                             @else
                                                 <span class="badge badge-secondary">Tidak Tersedia</span>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     // protected $fillable = [
-    //     'average_temperature', 'average_ph', 'average_feed', 'status', 'date'
+    //     'avgTemp', 'avgPh', 'avgFeed', 'status', 'date'
     // ];
     use HasFactory;
 
@@ -28,11 +28,11 @@ class Report extends Model
 
     public function feedStatusBadge($feedMax)
     {
-        return $this->average_feed < $feedMax ? 'badge-success' : 'badge-danger';
+        return $this->avgFeed < $feedMax ? 'badge-success' : 'badge-danger';
     }
 
     public function feedStatusText($feedMax)
     {
-        return $this->average_feed < $feedMax ? 'Pakan Tersedia' : 'Pakan Hampir Habis';
+        return $this->avgFeed < $feedMax ? 'feed Tersedia' : 'feed Hampir Habis';
     }
 }

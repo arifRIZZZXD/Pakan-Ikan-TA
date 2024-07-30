@@ -23,9 +23,9 @@
                         <tbody>
                             @foreach ($feedSchedules as $item)
                             <tr>
-                                <td>{{ date('h:i A', strtotime(sprintf('%02d', $item->jam1) . ':' . sprintf('%02d', $item->menit1))) }}</td>
-                                <td>{{ date('h:i A', strtotime(sprintf('%02d', $item->jam2) . ':' . sprintf('%02d', $item->menit2))) }}</td>
-                                <td>{{ date('h:i A', strtotime(sprintf('%02d', $item->jam3) . ':' . sprintf('%02d', $item->menit3))) }}</td>
+                                <td>{{ date('h:i A', strtotime(sprintf('%02d', $item->hourOne) . ':' . sprintf('%02d', $item->minuteOne))) }}</td>
+                                <td>{{ date('h:i A', strtotime(sprintf('%02d', $item->hourTwo) . ':' . sprintf('%02d', $item->minuteTwo))) }}</td>
+                                <td>{{ date('h:i A', strtotime(sprintf('%02d', $item->hourThree) . ':' . sprintf('%02d', $item->minuteThree))) }}</td>
                                 <td><a href="{{ route('feedSchedules.edit', $item->id) }}"><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square"></i></button></a></td>
                             </tr>
                             @endforeach
@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-12 card">
                   <div class="card-header">
-                    <h4 class="card-title">Cara Mengubah Jadwal Pakan</h4>
+                    <h4 class="card-title">Cara Mengubah Jadwal feed</h4>
                   </div>
                   <div class="card-body">
                     <div class="row">

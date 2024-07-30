@@ -6,13 +6,14 @@ use Carbon\Carbon;
 use App\Models\Report;
 use App\Models\Sensor;
 use App\Models\SettingData;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
     public function index()
     {
-        $reports = Report::orderBy('date', 'desc')->get();
+        $reports = Report::orderBy('created_at', 'desc')->get();
         $feedMax = SettingData::first()->feedMax;
         $weeklyReport = $this->getWeeklyReportData();
 
@@ -31,9 +32,9 @@ class ReportsController extends Controller
         $today = Carbon::today('Asia/Jakarta');
         $sensors = Sensor::whereDate('created_at', $today)->get();
 
-        $averageTemperature = $sensors->avg('suhu');
+        $averageTemperature = $sensors->avg('temp');
         $averagePh = $sensors->avg('ph');
-        $averageFeed = $sensors->avg('pakan');
+        $averageFeed = $sensors->avg('feed');
 
         $settings = SettingData::first();
         $tempMin = $settings->tempMin;
@@ -44,31 +45,34 @@ class ReportsController extends Controller
 
         $status = 'Safe';
         $warningCount = 0;
+        $reportInformation = '';
 
         if ($averageTemperature > $tempMax || $averageTemperature < $tempMin) {
             $warningCount++;
+            $reportInformation .= 'temp dari kolam tidak stabil. ';
         }
 
         if ($averagePh > $phMax || $averagePh < $phMin) {
             $warningCount++;
-        }
-
-        if ($averageFeed > $feedMax) {
-            $warningCount++;
+            $reportInformation .= 'PH dari kolam tidak stabil. ';
         }
 
         if ($warningCount >= 2) {
             $status = 'Danger';
+            $reportInformation = 'temp dan PH tidak stabil!';
         } elseif ($warningCount == 1) {
             $status = 'Warning';
+        } elseif ($warningCount == 0) {
+            $reportInformation = 'Aman aja semuanya stabil';
         }
 
         $report = new Report();
-        $report->average_temperature = $averageTemperature;
-        $report->average_ph = $averagePh;
-        $report->average_feed = $averageFeed;
+        $report->avgTemp = $averageTemperature;
+        $report->avgPh = $averagePh;
+        $report->avgFeed = $averageFeed;
         $report->status = $status;
         $report->date = $today;
+        $report->reportInformation = $reportInformation;
         $report->save();
 
         return redirect()->route('report.index')->with('success', 'Laporan berhasil dihasilkan');
@@ -93,9 +97,9 @@ class ReportsController extends Controller
         // Debugging output
         // dd($reports);
 
-        $averageTemperature = $reports->avg('average_temperature');
-        $averagePh = $reports->avg('average_ph');
-        $averageFeed = $reports->avg('average_feed') ?? 0; // Default to 0 if null
+        $averageTemperature = $reports->avg('avgTemp');
+        $averagePh = $reports->avg('avgPh');
+        $averageFeed = $reports->avg('avgFeed') ?? 0; // Default to 0 if null
 
         // Debugging output
         // dd($averageFeed);
@@ -142,6 +146,15 @@ class ReportsController extends Controller
             'startOfWeek' => $startOfWeek,
             'endOfWeek' => $endOfWeek
         ];
+    }
+
+    public function downloadPdf($id)
+    {
+        $report = Report::findOrFail($id);
+        $feedMax = SettingData::first()->feedMax;
+
+        $pdf = Pdf::loadView('admin.reports.pdfDaily', compact('report', 'feedMax'));
+        return $pdf->stream('daily_report_'.$report->date->format('Ymd').'.pdf');
     }
     
 }

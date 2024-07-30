@@ -29,14 +29,14 @@ class FeedSchedulesController extends Controller
         $time2 = explode(':', request('time2'));
         $time3 = explode(':', request('time3'));
 
-        $feedSchedules->jam1 = $time1[0];
-        $feedSchedules->menit1 = $time1[1];
+        $feedSchedules->hourOne = $time1[0];
+        $feedSchedules->minuteOne = $time1[1];
 
-        $feedSchedules->jam2 = $time2[0];
-        $feedSchedules->menit2 = $time2[1];
+        $feedSchedules->hourTwo = $time2[0];
+        $feedSchedules->minuteTwo = $time2[1];
 
-        $feedSchedules->jam3 = $time3[0];
-        $feedSchedules->menit3 = $time3[1];
+        $feedSchedules->hourThree = $time3[0];
+        $feedSchedules->minuteThree = $time3[1];
 
         $feedSchedules->save();
 

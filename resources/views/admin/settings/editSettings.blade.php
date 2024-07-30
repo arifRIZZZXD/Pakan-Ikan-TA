@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="feedMax">Minimal Pakan:</label>
+                                <label for="feedMax">Minimal Feed:</label>
                                 <input class="form-control" type="text" id="feedMax" name="feedMax" value="{{ $settingDatas->feedMax }}">
                             </div>
                         </div>

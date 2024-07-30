@@ -15,7 +15,7 @@ return new class extends Migration
 {
     Schema::create('devices', function (Blueprint $table) {
         $table->id();
-        $table->string('device_key')->unique(); // Kunci perangkat harus unik
+        $table->string('deviceKey')->unique(); // Kunci perangkat harus unik
         $table->timestamp('lastActive_at')->nullable();
         $table->timestamp('lastChecked_at')->nullable();
         $table->tinyInteger('isActive');

@@ -60,6 +60,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Notifications routes
     Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
-    Route::delete('/notifications/{id}', [NotificationsController::class, 'destroy'])->name('notifications.destroy');
     Route::get('/notifications/latest', [NotificationsController::class, 'getLatestNotifications']);
+    Route::delete('/notifications/{id}', [NotificationsController::class, 'destroy'])->name('notifications.destroy');
 });

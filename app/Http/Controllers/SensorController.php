@@ -8,24 +8,24 @@ use App\Http\Requests\UpdateSensorRequest;
 
 class SensorController extends Controller
 {
-    public function readSuhu(){
-        // Baca nilai / Isi table sensor dan ambil data suhu
+    public function readtemp(){
+        // Baca nilai / Isi table sensor dan ambil data temp
         $sensors = Sensor::select('*')->get();
-        // kirim ke tampilan baca suhu
-        return view('readSensor.readSuhu',['nilaiSensor' => $sensors]);
+        // kirim ke tampilan baca temp
+        return view('readSensor.readtemp',['nilaiSensor' => $sensors]);
     }
 
     public function readPh(){
-        // Baca nilai / Isi table sensor dan ambil data suhu
+        // Baca nilai / Isi table sensor dan ambil data temp
         $sensors = Sensor::select('*')->get();
-        // kirim ke tampilan baca suhu
+        // kirim ke tampilan baca temp
         return view('readSensor.readPh',['nilaiSensor' => $sensors]);
     }
 
-    public function readPakan(){
-        // Baca nilai / Isi table sensor dan ambil data suhu
+    public function readfeed(){
+        // Baca nilai / Isi table sensor dan ambil data temp
         $sensors = Sensor::select('*')->get();
-        // kirim ke tampilan baca suhu
-        return view('readSensor.readPakan',['nilaiSensor' => $sensors]);
+        // kirim ke tampilan baca temp
+        return view('readSensor.readfeed',['nilaiSensor' => $sensors]);
     }
 }

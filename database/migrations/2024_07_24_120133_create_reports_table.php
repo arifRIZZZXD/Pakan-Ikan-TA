@@ -10,11 +10,12 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->float('average_temperature');
-            $table->float('average_ph');
-            $table->float('average_feed');
+            $table->float('avgTemp', 8,1);
+            $table->float('avgPh', 8,2);
+            $table->float('avgFeed', 8,0);
             $table->string('status');
             $table->datetime('date');
+            $table->string('reportInformation');
             $table->timestamps();
         });
     }

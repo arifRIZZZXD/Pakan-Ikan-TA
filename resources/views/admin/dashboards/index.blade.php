@@ -28,7 +28,7 @@
                             <div class="col col-stats ms-3 ms-sm-0">
                                 <div class="numbers">
                                     <p class="card-category">Suhu</p>
-                                    <h4 class="card-title" id="suhu"><span>{{ $latestSensorData->suhu }}</span><span> °C</span> </h4>
+                                    <h4 class="card-title" id="temp"><span>{{ $latestSensorData->temp }}</span><span> °C</span> </h4>
                                 </div>
                             </div>
                         </div>
@@ -65,10 +65,10 @@
                             </div>
                             <div class="col col-stats ms-3 ms-sm-0">
                                 <div class="numbers">
-                                    <p class="card-category">Jumlah Pakan</p>
-                                    <h4 class="card-title" id="pakan">
-                                        @if($latestSensorData->pakan > 9)
-                                            <span class="badge badge-danger">Segera isi pakan!</span>
+                                    <p class="card-category">Jumlah pakan</p>
+                                    <h4 class="card-title" id="feed">
+                                        @if($latestSensorData->feed > 9)
+                                            <span class="badge badge-danger">Segera isi Pakan!</span>
                                         @else
                                             <span class="badge badge-success">Pakan tersedia</span>
                                         @endif
@@ -163,10 +163,10 @@
 @section('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var suhuCtx = document.getElementById('myChart').getContext('2d');
+        var tempCtx = document.getElementById('myChart').getContext('2d');
         var phCtx = document.getElementById('myChartPh').getContext('2d');
         
-        var suhuChart = new Chart(suhuCtx, {
+        var tempChart = new Chart(tempCtx, {
             type: 'line',
             data: @json($data1),
             options: {
@@ -203,18 +203,18 @@
                 url: '/get-latest-sensor-data',
                 method: 'GET',
                 success: function (response) {
-                    $('#suhu span').first().text(response.latestSensorData.suhu);
+                    $('#temp span').first().text(response.latestSensorData.temp);
                     $('#ph span').first().text(response.latestSensorData.ph);
     
-                    if (response.latestSensorData.pakan > 9) {
-                        $('#pakan span.badge').text('Segera isi pakan!').removeClass('badge-success').addClass('badge-danger');
+                    if (response.latestSensorData.feed > 9) {
+                        $('#feed span.badge').text('Segera isi feed!').removeClass('badge-success').addClass('badge-danger');
                     } else {
-                        $('#pakan span.badge').text('Pakan tersedia').removeClass('badge-danger').addClass('badge-success');
+                        $('#feed span.badge').text('feed tersedia').removeClass('badge-danger').addClass('badge-success');
                     }
     
-                    suhuChart.data.labels = response.data1.labels;
-                    suhuChart.data.datasets[0].data = response.data1.datasets[0].data;
-                    suhuChart.update();
+                    tempChart.data.labels = response.data1.labels;
+                    tempChart.data.datasets[0].data = response.data1.datasets[0].data;
+                    tempChart.update();
     
                     phChart.data.labels = response.data2.labels;
                     phChart.data.datasets[0].data = response.data2.datasets[0].data;

@@ -51,36 +51,63 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        function fetchLatestNotifications() {
+    function fetchLatestNotifications() {
+        $.ajax({
+            url: '/notifications/latest',
+            method: 'GET',
+            success: function(data) {
+                var tbody = $('#notification-table-body');
+                tbody.empty();
+                data.forEach(function(notification) {
+                    tbody.append(`
+                        <tr data-id="${notification.id}">
+                            <td>${notification.category}</td>
+                            <td>${notification.information}</td>
+                            <td>${notification.time}</td>
+                            <td>${notification.date}</td>
+                            <td>
+                                <form class="delete-form" data-id="${notification.id}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-dark delete-button" type="button"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    `);
+                });
+                attachDeleteHandlers();
+            }
+        });
+    }
+
+    function attachDeleteHandlers() {
+        $('.delete-button').off('click').on('click', function() {
+            var button = $(this);
+            var form = button.closest('.delete-form');
+            var id = form.data('id');
+
             $.ajax({
-                url: '/notifications/latest',
-                method: 'GET',
-                success: function(data) {
-                    var tbody = $('#notification-table-body');
-                    tbody.empty();
-                    data.forEach(function(notification) {
-                        tbody.append(`
-                            <tr>
-                                <td>${notification.category}</td>
-                                <td>${notification.information}</td>
-                                <td>${notification.time}</td>
-                                <td>${notification.date}</td>
-                                <td>
-                                    <form action="/notifications/${notification.id}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-sm btn-dark"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        `);
-                    });
+                url: `/notifications/${id}`,
+                method: 'DELETE',
+                data: form.serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        button.closest('tr').remove();
+                        alert(response.message);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function() {
+                    alert('Terjadi kesalahan saat mencoba menghapus notifikasi.');
                 }
             });
-        }
+        });
+    }
 
-        // Fetch notifications every 10 seconds
-        setInterval(fetchLatestNotifications, 1000);
-    });
+    // Ambil notifikasi setiap 10 detik
+    setInterval(fetchLatestNotifications, 3000);
+    fetchLatestNotifications(); // Ambil notifikasi pertama kali
+});
 </script>
 @endsection

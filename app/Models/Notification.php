@@ -14,6 +14,10 @@ class Notification extends Model
         'category',
         'information',
         'time',
-        'date'
+        'date',
+        'lastValueTemp',
+        'lastValueFeed',
+        'lastValuePh',
+        'last_notified_at'
     ];
 }
