@@ -14,12 +14,12 @@ class FeedSchedulesSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            'jam1' => 7,
-            'menit1' => 35,
-            'jam2' => 12,
-            'menit2' => 45,
-            'jam3' => 18,
-            'menit3' => 35,
+            'hourOne' => 7,
+            'minuteOne' => 35,
+            'hourTwo' => 12,
+            'minuteTwo' => 45,
+            'hourThree' => 18,
+            'minuteThree' => 35,
         ];
 
         DB::table('feed_schedules')->insert($data);

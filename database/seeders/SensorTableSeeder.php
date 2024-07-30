@@ -14,9 +14,9 @@ class SensorTableSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            'suhu' => 30,
+            'temp' => 30,
             'pH' => 6.3,
-            'pakan' => 6,
+            'feed' => 6,
             'created_at' => now(),
             'updated_at' => now()
         ];

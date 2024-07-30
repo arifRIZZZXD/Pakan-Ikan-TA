@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('feed_schedules', function (Blueprint $table) {
             $table->id();
-            $table->integer('jam1');
-            $table->integer('menit1');
-            $table->integer('jam2');
-            $table->integer('menit2');
-            $table->integer('jam3');
-            $table->integer('menit3');
+            $table->integer('hourOne');
+            $table->integer('minuteOne');
+            $table->integer('hourTwo');
+            $table->integer('minuteTwo');
+            $table->integer('hourThree');
+            $table->integer('minuteThree');
             $table->timestamps();
         });
     }

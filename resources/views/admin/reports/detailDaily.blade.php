@@ -14,14 +14,14 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>Rata-rata Suhu</th>
-                                    <td>{{ $report->average_temperature }} °C</td>
+                                    <td>{{ $report->avgTemp }} °C</td>
                                 </tr>
                                 <tr>
                                     <th>Rata-rata PH</th>
-                                    <td>{{ $report->average_ph }}</td>
+                                    <td>{{ $report->avgPh }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Rata-rata SISA Pakan</th>
+                                    <th>Rata-rata sisa Pakan</th>
                                     <td><span class="badge {{ $report->feedStatusBadge($feedMax) }}">
                                         {{ $report->feedStatusText($feedMax) }}
                                     </span></td>
@@ -33,6 +33,10 @@
                                 <tr>
                                     <th>Status</th>
                                     <td><span class="badge {{ $report->statusBadge() }}">{{ $report->status }}</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Keterangan</th>
+                                    <td>{{ $report->reportInformation }}</span></td>
                                 </tr>
                             </table>
                             <a href="{{ route('report.daily.pdf', $report->id) }}"><button class="btn btn-sm btn-success">Print</button></a>

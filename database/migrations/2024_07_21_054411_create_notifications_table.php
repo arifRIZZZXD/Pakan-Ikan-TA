@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('information');
             $table->time('time');
             $table->date('date');
+            $table->float('lastValueTemp')->nullable(); // Mengatur kolom sebagai nullable
+            $table->float('lastValueFeed')->nullable(); // Mengatur kolom sebagai nullable
+            $table->float('lastValuePh')->nullable(); // Mengatur kolom sebagai nullable
             $table->timestamps();
         });
     }

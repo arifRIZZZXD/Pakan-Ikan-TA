@@ -32,7 +32,7 @@ class DashboardController extends Controller
                 'label' => 'Suhu',
                 'backgroundColor' => 'rgba(0, 0, 0, 0)',
                 'borderColor' => 'rgba(255, 99, 132, 1)',
-                'data' => $sales->pluck('suhu'),
+                'data' => $sales->pluck('temp'),
             ],
         ],
     ];
@@ -51,7 +51,7 @@ class DashboardController extends Controller
         ],
     ];
 
-    // Ambil jadwal pakan selanjutnya
+    // Ambil jadwal feed selanjutnya
     $nextFeedSchedule = $this->getNextFeedSchedule();
 
     return view('admin.dashboards.index', compact('data1', 'data2', 'latestSensorData', 'nextFeedSchedule', 'feedMax'));
@@ -75,7 +75,7 @@ class DashboardController extends Controller
             }
         }
 
-        // Jika tidak ada jadwal pakan selanjutnya, return null
+        // Jika tidak ada jadwal feed selanjutnya, return null
         return $nextFeedTime ?: 'sudah tidak ada';
     }
 
@@ -91,10 +91,10 @@ class DashboardController extends Controller
         }),
         'datasets' => [
             [
-                'label' => 'Suhu',
+                'label' => 'temp',
                 'backgroundColor' => 'rgba(0, 0, 0, 0)',
                 'borderColor' => 'rgba(255, 99, 132, 1)',
-                'data' => $sales->pluck('suhu'),
+                'data' => $sales->pluck('temp'),
             ],
         ],
     ];
