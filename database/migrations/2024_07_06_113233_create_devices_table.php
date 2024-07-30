@@ -16,9 +16,9 @@ return new class extends Migration
     Schema::create('devices', function (Blueprint $table) {
         $table->id();
         $table->string('deviceKey')->unique(); // Kunci perangkat harus unik
+        $table->tinyInteger('isActive');
         $table->timestamp('lastActive_at')->nullable();
         $table->timestamp('lastChecked_at')->nullable();
-        $table->tinyInteger('isActive');
         $table->timestamps();
     });
 }

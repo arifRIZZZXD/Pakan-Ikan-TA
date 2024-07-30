@@ -18,6 +18,6 @@ class Notification extends Model
         'lastValueTemp',
         'lastValueFeed',
         'lastValuePh',
-        'last_notified_at'
+        'lastNotified_at'
     ];
 }
