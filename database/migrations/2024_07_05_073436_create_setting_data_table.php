@@ -14,7 +14,7 @@ return new class extends Migration
             $table->decimal('tempMax', 8,0);
             $table->decimal('phMin', 8,1);
             $table->decimal('phMax', 8,1);
-            $table->decimal('feedMin');
+            $table->integer('feedMax');
             $table->timestamps();
         });
     }

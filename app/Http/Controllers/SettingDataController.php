@@ -26,7 +26,7 @@ class SettingDataController extends Controller
             'tempMax' => 'required|numeric',
             'phMin' => 'required|numeric',
             'phMax' => 'required|numeric',
-            'feedMin' => 'required|numeric',
+            'feedMax' => 'required|numeric',
         ]);
 
         $settingTool = SettingData::findOrFail($id);

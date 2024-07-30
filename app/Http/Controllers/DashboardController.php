@@ -8,53 +8,54 @@ use Illuminate\Http\Request;
 use App\Models\FeedSchedules;
 use App\Models\SettingData;
 
+
 class DashboardController extends Controller
 {
     public function index()
-    {
-        $latestSensorData = Sensor::orderBy('created_at', 'desc')->first();
-        $feedMin = SettingData::first()->feedMin;  // Mengambil nilai feedMin
+{
+    $latestSensorData = Sensor::orderBy('created_at', 'desc')->first();
+    $feedMax = SettingData::first()->feedMax;  // Mengambil nilai feedMax
 
-        // Ambil hanya 10 data terbaru dari tabel 'sensors'
-        $sales = Sensor::orderBy('created_at', 'desc')->take(10)->get();
-        
-        // Urutkan kembali data agar grafik menunjukkan waktu secara urut
-        $sales = $sales->sortBy('created_at');
-        
-        // Buat data untuk Chart.js
-        $data1 = [
-            'labels' => $sales->pluck('created_at')->map(function ($date) {
-                return $date->format('H:i:s'); // Format tanggal sesuai kebutuhan
-            }),
-            'datasets' => [
-                [
-                    'label' => 'Suhu',
-                    'backgroundColor' => 'rgba(0, 0, 0, 0)',
-                    'borderColor' => 'rgba(255, 99, 132, 1)',
-                    'data' => $sales->pluck('suhu'),
-                ],
+    // Ambil hanya 10 data terbaru dari tabel 'sensors'
+    $sales = Sensor::orderBy('created_at', 'desc')->take(10)->get();
+    
+    // Urutkan kembali data agar grafik menunjukkan waktu secara urut
+    $sales = $sales->sortBy('created_at');
+    
+    // Buat data untuk Chart.js
+    $data1 = [
+        'labels' => $sales->pluck('created_at')->map(function ($date) {
+            return $date ? $date->format('H:i:s') : 'N/A'; // Format tanggal sesuai kebutuhan
+        }),
+        'datasets' => [
+            [
+                'label' => 'Suhu',
+                'backgroundColor' => 'rgba(0, 0, 0, 0)',
+                'borderColor' => 'rgba(255, 99, 132, 1)',
+                'data' => $sales->pluck('suhu'),
             ],
-        ];
+        ],
+    ];
 
-        $data2 = [
-            'labels' => $sales->pluck('created_at')->map(function ($date) {
-                return $date->format('H:i:s'); // Format tanggal sesuai kebutuhan
-            }),
-            'datasets' => [
-                [
-                    'label' => 'pH',
-                    'backgroundColor' => 'rgba(0, 0, 0, 0)',
-                    'borderColor' => 'rgba(0, 0, 255, 0.6)',
-                    'data' => $sales->pluck('ph'),
-                ],
+    $data2 = [
+        'labels' => $sales->pluck('created_at')->map(function ($date) {
+            return $date ? $date->format('H:i:s') : 'N/A'; // Format tanggal sesuai kebutuhan
+        }),
+        'datasets' => [
+            [
+                'label' => 'pH',
+                'backgroundColor' => 'rgba(0, 0, 0, 0)',
+                'borderColor' => 'rgba(0, 0, 255, 0.6)',
+                'data' => $sales->pluck('ph'),
             ],
-        ];
+        ],
+    ];
 
-        // Ambil jadwal pakan selanjutnya
-        $nextFeedSchedule = $this->getNextFeedSchedule();
+    // Ambil jadwal pakan selanjutnya
+    $nextFeedSchedule = $this->getNextFeedSchedule();
 
-        return view('admin.dashboards.index', compact('data1', 'data2', 'latestSensorData', 'nextFeedSchedule', 'feedMin'));
-    }
+    return view('admin.dashboards.index', compact('data1', 'data2', 'latestSensorData', 'nextFeedSchedule', 'feedMax'));
+}
 
     private function getNextFeedSchedule()
     {
@@ -79,44 +80,44 @@ class DashboardController extends Controller
     }
 
     public function getLatestSensorData()
-    {
-        $latestSensorData = Sensor::orderBy('created_at', 'desc')->first();
-        $feedMin = SettingData::first()->feedMin;  // Mengambil nilai feedMin
-        $sales = Sensor::orderBy('created_at', 'desc')->take(10)->get()->sortBy('created_at');
+{
+    $latestSensorData = Sensor::orderBy('created_at', 'desc')->first();
+    $feedMax = SettingData::first()->feedMax;
+    $sales = Sensor::orderBy('created_at', 'desc')->take(10)->get()->sortBy('created_at');
 
-        $data1 = [
-            'labels' => $sales->pluck('created_at')->map(function ($date) {
-                return $date->format('H:i:s');
-            }),
-            'datasets' => [
-                [
-                    'label' => 'Suhu',
-                    'backgroundColor' => 'rgba(0, 0, 0, 0)',
-                    'borderColor' => 'rgba(255, 99, 132, 1)',
-                    'data' => $sales->pluck('suhu'),
-                ],
+    $data1 = [
+        'labels' => $sales->pluck('created_at')->map(function ($date) {
+            return $date->format('H:i:s');
+        }),
+        'datasets' => [
+            [
+                'label' => 'Suhu',
+                'backgroundColor' => 'rgba(0, 0, 0, 0)',
+                'borderColor' => 'rgba(255, 99, 132, 1)',
+                'data' => $sales->pluck('suhu'),
             ],
-        ];
+        ],
+    ];
 
-        $data2 = [
-            'labels' => $sales->pluck('created_at')->map(function ($date) {
-                return $date->format('H:i:s');
-            }),
-            'datasets' => [
-                [
-                    'label' => 'pH',
-                    'backgroundColor' => 'rgba(0, 0, 0, 0)',
-                    'borderColor' => 'rgba(0, 0, 255, 0.6)',
-                    'data' => $sales->pluck('ph'),
-                ],
+    $data2 = [
+        'labels' => $sales->pluck('created_at')->map(function ($date) {
+            return $date->format('H:i:s');
+        }),
+        'datasets' => [
+            [
+                'label' => 'pH',
+                'backgroundColor' => 'rgba(0, 0, 0, 0)',
+                'borderColor' => 'rgba(0, 0, 255, 0.6)',
+                'data' => $sales->pluck('ph'),
             ],
-        ];
+        ],
+    ];
 
-        return response()->json([
-            'latestSensorData' => $latestSensorData,
-            'data1' => $data1,
-            'data2' => $data2,
-            'feedMin' => $feedMin,  // Sertakan nilai feedMin dalam respons JSON
-        ]);
-    }
+    return response()->json([
+        'latestSensorData' => $latestSensorData,
+        'data1' => $data1,
+        'data2' => $data2,
+        'feedMax' => $feedMax,
+    ]);
+}
 }

@@ -15,8 +15,10 @@ class SensorTableSeeder extends Seeder
     {
         $data = [
             'suhu' => 30,
-            'pH' => 6,3,
-            'pakan' => 6.0,
+            'pH' => 6.3,
+            'pakan' => 6,
+            'created_at' => now(),
+            'updated_at' => now()
         ];
 
         DB::table('sensors')->insert($data);

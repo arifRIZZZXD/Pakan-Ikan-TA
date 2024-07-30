@@ -23,12 +23,9 @@ use App\Models\FeedSchedules;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 // Login and Logout routes
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/loginProses', [LoginController::class, 'auth'])->name('loginProses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -52,20 +49,17 @@ Route::middleware(['auth'])->group(function () {
     // Device routes
     Route::get('devices', [DeviceController::class, 'index'])->name('device.index');
 
-    // Report routes
-    Route::get('report',[ReportsController::class, 'index'])->name('report.index');
+    // Report routes 
+    Route::get('/report',[ReportsController::class, 'index'])->name('report.index');
+    Route::get('/report/daily/{id}', [ReportsController::class, 'dailyReportDetail'])->name('report.daily');
+    Route::get('/weekly-report-detail',[ReportsController::class, 'weeklyReportDetail'])->name('report.weekly');
+    Route::get('/generate-report', [ReportsController::class, 'generateReport'])->name('generate-report');
+    Route::delete('/report/{id}', [ReportsController::class, 'destroy'])->name('report.destroy');
+    Route::get('report/daily/pdf/{id}', [ReportsController::class, 'downloadPdf'])->name('report.daily.pdf');
+
 
     // Notifications routes
-    Route::get('notification',[NotificationsController::class, 'index'])->name('notification.index');
-    Route::get('notification/data',[NotificationsController::class, 'getData'])->name('notification.data');
-    Route::delete('notification/{id}', [NotificationsController::class, 'destroy'])->name('notification.destroy');
-
-});
-
-Route::fallback(function () {
-    if (auth()->check()) {
-        return redirect()->route('dashboard');
-    } else {
-        return redirect()->route('login');
-    }
+    Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+    Route::delete('/notifications/{id}', [NotificationsController::class, 'destroy'])->name('notifications.destroy');
+    Route::get('/notifications/latest', [NotificationsController::class, 'getLatestNotifications']);
 });

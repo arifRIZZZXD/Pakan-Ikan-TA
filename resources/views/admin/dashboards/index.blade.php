@@ -6,8 +6,11 @@
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-10">
                         <h3 class="fw-bold">Dashboard</h3>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{{ route('generate-report') }}"><button class="btn btn-primary">Generate Report</button></a>
                     </div>
                 </div>
             </div>
@@ -159,68 +162,68 @@
 
 @section('scripts')
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var chartData = @json($data1);
-    var myChart = new Chart(ctx, {
-        type: 'line', // Tipe chart yang ingin Anda buat
-        data: chartData,
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    beginAtZero: true
+    document.addEventListener("DOMContentLoaded", function() {
+        var suhuCtx = document.getElementById('myChart').getContext('2d');
+        var phCtx = document.getElementById('myChartPh').getContext('2d');
+        
+        var suhuChart = new Chart(suhuCtx, {
+            type: 'line',
+            data: @json($data1),
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
                 }
-            }
-        }
-    });
-    var ctx = document.getElementById('myChartPh').getContext('2d');
-    var chartData = @json($data2);
-    var myChart = new Chart(ctx, {
-        type: 'line', // Tipe chart yang ingin Anda buat
-        data: chartData,
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-    function fetchLatestData() {
-        $.ajax({
-            url: '/get-latest-sensor-data',
-            method: 'GET',
-            success: function (response) {
-                $('#suhu span').first().text(response.latestSensorData.suhu);
-                $('#ph span').first().text(response.latestSensorData.ph);
-
-                if (response.latestSensorData.pakan > 9) {
-                    $('#pakan span.badge').text('Segera isi pakan!').removeClass('badge-success').addClass('badge-danger');
-                } else {
-                    $('#pakan span.badge').text('Pakan tersedia').removeClass('badge-danger').addClass('badge-success');
-                }
-
-                suhuChart.data.labels = response.data1.labels;
-                suhuChart.data.datasets[0].data = response.data1.datasets[0].data;
-                suhuChart.update();
-
-                phChart.data.labels = response.data2.labels;
-                phChart.data.datasets[0].data = response.data2.datasets[0].data;
-                phChart.update();
             }
         });
-    }
-
-    setInterval(fetchLatestData, 5000); // Memanggil fetchLatestData setiap 5 detik
-});
-</script>
+        
+        var phChart = new Chart(phCtx, {
+            type: 'line',
+            data: @json($data2),
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    
+        function fetchLatestData() {
+            $.ajax({
+                url: '/get-latest-sensor-data',
+                method: 'GET',
+                success: function (response) {
+                    $('#suhu span').first().text(response.latestSensorData.suhu);
+                    $('#ph span').first().text(response.latestSensorData.ph);
+    
+                    if (response.latestSensorData.pakan > 9) {
+                        $('#pakan span.badge').text('Segera isi pakan!').removeClass('badge-success').addClass('badge-danger');
+                    } else {
+                        $('#pakan span.badge').text('Pakan tersedia').removeClass('badge-danger').addClass('badge-success');
+                    }
+    
+                    suhuChart.data.labels = response.data1.labels;
+                    suhuChart.data.datasets[0].data = response.data1.datasets[0].data;
+                    suhuChart.update();
+    
+                    phChart.data.labels = response.data2.labels;
+                    phChart.data.datasets[0].data = response.data2.datasets[0].data;
+                    phChart.update();
+                }
+            });
+        }
+    
+        setInterval(fetchLatestData, 5000); // Memanggil fetchLatestData setiap 5 detik
+    });
+    </script>
 @endsection

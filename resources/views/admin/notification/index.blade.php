@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="notifications-table" class="display table table-striped table-hover">
+                            <table id="basic-datatables" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>Category</th>
@@ -21,8 +21,22 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <!-- Data akan dimuat di sini melalui AJAX -->
+                                <tbody id="notification-table-body">
+                                    @foreach($notifications as $notification)
+                                    <tr>
+                                        <td>{{ $notification->category }}</td>
+                                        <td>{{ $notification->information }}</td>
+                                        <td>{{ $notification->time }}</td>
+                                        <td>{{ $notification->date }}</td>
+                                        <td>
+                                            <form action="{{ route('notifications.destroy', $notification->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-sm btn-dark"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -35,76 +49,38 @@
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
     $(document).ready(function() {
-        function loadNotifications() {
+        function fetchLatestNotifications() {
             $.ajax({
-                url: "{{ route('notification.data') }}",
+                url: '/notifications/latest',
                 method: 'GET',
                 success: function(data) {
-                    var tbody = $('#notifications-table tbody');
-                    tbody.empty(); // Kosongkan tabel
-    
+                    var tbody = $('#notification-table-body');
+                    tbody.empty();
                     data.forEach(function(notification) {
-                        var row = '<tr>' +
-                            '<td>' + notification.category + '</td>' +
-                            '<td>' + notification.keterangan + '</td>' +
-                            '<td>' + notification.jam + '</td>' +
-                            '<td>' + notification.tanggal + '</td>' +
-                            '<td><button class="btn btn-sm btn-dark delete-btn" data-id="' + notification.id + '"><i class="fas fa-trash-alt"></i></button></td>' +
-                            '</tr>';
-                        tbody.append(row);
-                    });
-    
-                    // Tambahkan event listener untuk tombol hapus
-                    $('.delete-btn').click(function() {
-                        var id = $(this).data('id');
-                        Swal.fire({
-                            title: 'Apakah anda yakin menghapus notifikasi ini?',
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Ya, hapus!',
-                            cancelButtonText: 'Batal'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                $.ajax({
-                                    url: '/notifications/' + id,
-                                    method: 'DELETE',
-                                    data: {
-                                        _token: '{{ csrf_token() }}'
-                                    },
-                                    success: function(response) {
-                                        Swal.fire(
-                                            'Dihapus!',
-                                            response.success,
-                                            'success'
-                                        );
-                                        loadNotifications();
-                                    },
-                                    error: function(response) {
-                                        Swal.fire(
-                                            'Error!',
-                                            response.error,
-                                            'error'
-                                        );
-                                    }
-                                });
-                            }
-                        });
+                        tbody.append(`
+                            <tr>
+                                <td>${notification.category}</td>
+                                <td>${notification.information}</td>
+                                <td>${notification.time}</td>
+                                <td>${notification.date}</td>
+                                <td>
+                                    <form action="/notifications/${notification.id}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-dark"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        `);
                     });
                 }
             });
         }
-    
-        // Panggil fungsi loadNotifications setiap 5 detik
-        setInterval(loadNotifications, 5000);
-    
-        // Panggil fungsi loadNotifications saat halaman pertama kali dimuat
-        loadNotifications();
+
+        // Fetch notifications every 10 seconds
+        setInterval(fetchLatestNotifications, 1000);
     });
-    </script>
+</script>
 @endsection

@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SettingData extends Model
+class Notification extends Model
 {
     use HasFactory;
-    protected $table = 'setting_datas';
+    protected $table = 'notifications';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'tempMin','tempMax','phMin','phMax', 'feedMax'
+        'category',
+        'information',
+        'time',
+        'date'
     ];
 }

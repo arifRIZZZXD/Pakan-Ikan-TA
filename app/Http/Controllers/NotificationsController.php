@@ -2,93 +2,116 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Sensor;
 use App\Models\SettingData;
+use App\Models\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class NotificationsController extends Controller
 {
     public function index()
     {
-        return view('admin.notification.index');
-    }
-
-    public function getData()
-    {
-        // Ambil data pengaturan dari tabel setting_datas
+        // Retrieve the settings data
         $settings = SettingData::first();
 
+        // Ensure settings are available
+        if (!$settings) {
+            return redirect()->back()->with('error', 'Settings data is missing.');
+        }
+
+        // Extract settings values
         $tempMin = $settings->tempMin;
         $tempMax = $settings->tempMax;
         $phMin = $settings->phMin;
         $phMax = $settings->phMax;
-        $feedMin = $settings->feedMin;
+        $feedMax = $settings->feedMax;
 
-        // Ambil data dari tabel sensor dan urutkan berdasarkan created_at dari yang terbaru
-        $sensors = Sensor::orderBy('created_at', 'desc')->get();
-
-        // Mengolah data untuk notifikasi
-        $notifications = [];
+        $sensors = Sensor::all();
 
         foreach ($sensors as $sensor) {
-            if ($sensor->suhu > $tempMax) {
-                $notifications[] = [
-                    'id' => $sensor->id, // Tambahkan ID untuk penghapusan
-                    'category' => 'Suhu',
-                    'keterangan' => 'Suhu kolam lebih dari ' . $tempMax . ' °C segera periksa area kolam dan fan pada kolam!',
-                    'jam' => $sensor->created_at->format('H:i:s'),
-                    'tanggal' => $sensor->created_at->format('Y/m/d'),
-                ];
-            } elseif ($sensor->suhu < $tempMin) {
-                $notifications[] = [
-                    'id' => $sensor->id, // Tambahkan ID untuk penghapusan
-                    'category' => 'Suhu',
-                    'keterangan' => 'Suhu kolam kurang dari ' . $tempMin . ' °C segera periksa area kolam dan heater pada kolam!',
-                    'jam' => $sensor->created_at->format('H:i:s'),
-                    'tanggal' => $sensor->created_at->format('Y/m/d'),
-                ];
-            }
+            DB::transaction(function () use ($sensor, $tempMin, $tempMax, $phMin, $phMax, $feedMax) {
+                $currentTime = Carbon::now('Asia/Jakarta');
+                $date = $currentTime->format('Y-m-d');
+                $time = $currentTime->format('H:i:s');
 
-            if ($sensor->pakan <= $feedMin) {
-                $notifications[] = [
-                    'id' => $sensor->id, // Tambahkan ID untuk penghapusan
-                    'category' => 'Pakan',
-                    'keterangan' => 'Pakan ikan hampir habis segera isi ulang pakan!',
-                    'jam' => $sensor->created_at->format('H:i:s'),
-                    'tanggal' => $sensor->created_at->format('Y/m/d'),
-                ];
-            }
+                $checkNotificationInterval = function ($category, $interval) use ($currentTime) {
+                    $lastNotification = Notification::where('category', $category)
+                        ->orderBy('created_at', 'desc')
+                        ->first();
 
-            if ($sensor->ph > $phMax) {
-                $notifications[] = [
-                    'id' => $sensor->id, // Tambahkan ID untuk penghapusan
-                    'category' => 'Kadar PH',
-                    'keterangan' => 'Kadar PH lebih dari ' . $phMax . ' segera cek air pada kolam!',
-                    'jam' => $sensor->created_at->format('H:i:s'),
-                    'tanggal' => $sensor->created_at->format('Y/m/d'),
-                ];
-            } elseif ($sensor->ph < $phMin) {
-                $notifications[] = [
-                    'id' => $sensor->id, // Tambahkan ID untuk penghapusan
-                    'category' => 'Kadar PH',
-                    'keterangan' => 'Kadar PH kurang dari ' . $phMin . ' segera cek air pada kolam!',
-                    'jam' => $sensor->created_at->format('H:i:s'),
-                    'tanggal' => $sensor->created_at->format('Y/m/d'),
-                ];
-            }
+                    if ($lastNotification) {
+                        $lastNotifiedAt = Carbon::parse($lastNotification->last_notified_at);
+                        if ($currentTime->diffInMinutes($lastNotifiedAt) < $interval) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                };
+
+                if ($sensor->suhu > $tempMax && $checkNotificationInterval('Suhu', 3)) {
+                    Notification::create([
+                        'category' => 'Suhu',
+                        'information' => "Suhu kolam lebih dari $tempMax °C segera periksa area kolam dan fan pada kolam!",
+                        'time' => $time,
+                        'date' => $date,
+                        'last_notified_at' => $currentTime,
+                    ]);
+                }
+
+                if ($sensor->suhu < $tempMin && $checkNotificationInterval('Suhu', 3)) {
+                    Notification::create([
+                        'category' => 'Suhu',
+                        'information' => "Suhu kolam kurang dari $tempMin °C segera periksa area kolam dan heater pada kolam!",
+                        'time' => $time,
+                        'date' => $date,
+                        'last_notified_at' => $currentTime,
+                    ]);
+                }
+
+                if ($sensor->pakan > $feedMax && $checkNotificationInterval('Pakan', 3)) {
+                    Notification::create([
+                        'category' => 'Pakan',
+                        'information' => "Pakan ikan hampir habis segera isi ulang pakan!",
+                        'time' => $time,
+                        'date' => $date,
+                        'last_notified_at' => $currentTime,
+                    ]);
+                }
+
+                if ($sensor->ph > $phMax && $checkNotificationInterval('Kadar PH', 3)) {
+                    Notification::create([
+                        'category' => 'Kadar PH',
+                        'information' => "Kadar PH lebih dari $phMax segera cek air pada kolam!",
+                        'time' => $time,
+                        'date' => $date,
+                        'last_notified_at' => $currentTime,
+                    ]);
+                }
+
+                if ($sensor->ph < $phMin && $checkNotificationInterval('Kadar PH', 3)) {
+                    Notification::create([
+                        'category' => 'Kadar PH',
+                        'information' => "Kadar PH kurang dari $phMin segera cek air pada kolam!",
+                        'time' => $time,
+                        'date' => $date,
+                        'last_notified_at' => $currentTime,
+                    ]);
+                }
+            });
         }
 
-        return response()->json($notifications);
+        $notifications = Notification::orderBy('created_at', 'desc')->take(100)->get();
+
+        return view('admin.notification.index', compact('notifications'));
     }
 
-    public function destroy($id)
+    public function getLatestNotifications()
     {
-        $sensor = Sensor::find($id);
-        if ($sensor) {
-            $sensor->delete();
-            return response()->json(['success' => 'Notifikasi berhasil dihapus']);
-        } else {
-            return response()->json(['error' => 'Notifikasi tidak ditemukan'], 404);
-        }
+        $notifications = Notification::orderBy('created_at', 'desc')->take(100)->get();
+        return response()->json($notifications);
     }
 }
