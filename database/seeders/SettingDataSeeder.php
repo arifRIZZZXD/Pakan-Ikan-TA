@@ -20,7 +20,7 @@ class SettingDataSeeder extends Seeder
             'tempMax' => 35,
             'pHMin' => 6.0,
             'pHMax' => 7.5,
-            'feedMin' => 8,
+            'feedMax' => 8,
         ];
 
         DB::table('setting_datas')->insert($data);

@@ -18,7 +18,7 @@
                                     <th>Maksimal Suhu</th>
                                     <th>Minimal Kadar Ph</th>
                                     <th>Maksimal Kadar Ph</th>
-                                    <th>Minimal Pakan</th>
+                                    <th>Miksimal Pakan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -29,7 +29,7 @@
                                     <td>{{ $data->tempMax }} <span>°C</span></td>
                                     <td>{{ $data->phMin }} </td>
                                     <td>{{ $data->phMax }} </td>
-                                    <td>{{ $data->feedMin }} </td>
+                                    <td>{{ $data->feedMax }} </td>
                                     <td>
                                         <a href="{{ route('settings.editSettings', $data->id) }}"><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square"></i></button></a>
                                     </td>
