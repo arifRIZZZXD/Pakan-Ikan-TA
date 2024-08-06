@@ -21,18 +21,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($deviceKey as $item)
-                                
-                            @endforeach --}}
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <span class="badge badge-success">Terhubung</span>
-                                    <span class="badge badge-danger">Terputus</span>
-                                </td>
-                                <td><button class="btn btn-sm btn-dark"><i class="fas fa-pen-square"></i></button></td>
-                            </tr>
+                            @foreach($deviceKey as $key)
+                                <tr>
+                                    <td >{{ $loop->iteration }}</td>
+                                    <td >{{ $key->deviceKey }}</td>
+                                    <td>
+                                        @if($key->isActive)
+                                            <span class="badge badge-success">Terhubung</span>
+                                        @else
+                                            <span class="badge badge-danger">Terputus</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-dark btn-sm"
+                                            data-id="{{ $key->id }}" data-key="{{ $key->deviceKey }}">
+                                            <i class="fas fa-pen-square"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>

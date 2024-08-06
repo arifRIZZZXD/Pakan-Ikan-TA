@@ -33,6 +33,6 @@ class Report extends Model
 
     public function feedStatusText($feedMax)
     {
-        return $this->avgFeed < $feedMax ? 'feed Tersedia' : 'feed Hampir Habis';
+        return $this->avgFeed < $feedMax ? 'Pakan Tersedia' : 'Pakan Hampir Habis';
     }
 }

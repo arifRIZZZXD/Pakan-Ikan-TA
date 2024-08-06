@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('lastValueTemp')->nullable(); // Mengatur kolom sebagai nullable
             $table->float('lastValueFeed')->nullable(); // Mengatur kolom sebagai nullable
             $table->float('lastValuePh')->nullable(); // Mengatur kolom sebagai nullable
+            $table->timestamp('lastNotified_at')->nullable();
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@ use App\Http\Controllers\FeedSchedulesController;
 use App\Http\Controllers\SettingDataController;
 use App\Http\Controllers\SettingToolsController;
 use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\SensorController;
 use App\Models\Device;
 use App\Models\FeedSchedules;
 
@@ -62,4 +63,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/latest', [NotificationsController::class, 'getLatestNotifications']);
     Route::delete('/notifications/{id}', [NotificationsController::class, 'destroy'])->name('notifications.destroy');
+    
+    // Read Sensor
+    Route::get('/readTemp', [SensorController::class, 'readTemp'])->name('readTemp');
+    Route::get('/readPh', [SensorController::class, 'readPh'])->name('readPh');
+    Route::get('/readFeed', [SensorController::class, 'readFeed'])->name('readFeed');
 });

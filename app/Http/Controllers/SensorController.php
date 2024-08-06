@@ -8,24 +8,24 @@ use App\Http\Requests\UpdateSensorRequest;
 
 class SensorController extends Controller
 {
-    public function readtemp(){
-        // Baca nilai / Isi table sensor dan ambil data temp
-        $sensors = Sensor::select('*')->get();
+    public function readTemp(){
+        // Baca nilai terakhir dari tabel sensor
+        $latestSensor = Sensor::orderBy('created_at', 'desc')->first();
         // kirim ke tampilan baca temp
-        return view('readSensor.readtemp',['nilaiSensor' => $sensors]);
+        return view('admin.readSensor.readTemp', ['nilaiSensor' => $latestSensor]);
     }
 
     public function readPh(){
-        // Baca nilai / Isi table sensor dan ambil data temp
-        $sensors = Sensor::select('*')->get();
-        // kirim ke tampilan baca temp
-        return view('readSensor.readPh',['nilaiSensor' => $sensors]);
+        // Baca nilai terakhir dari tabel sensor
+        $latestSensor = Sensor::orderBy('created_at', 'desc')->first();
+        // kirim ke tampilan baca ph
+        return view('admin.readSensor.readPh', ['nilaiSensor' => $latestSensor]);
     }
 
-    public function readfeed(){
-        // Baca nilai / Isi table sensor dan ambil data temp
-        $sensors = Sensor::select('*')->get();
-        // kirim ke tampilan baca temp
-        return view('readSensor.readfeed',['nilaiSensor' => $sensors]);
+    public function readFeed(){
+        // Baca nilai terakhir dari tabel sensor
+        $latestSensor = Sensor::orderBy('created_at', 'desc')->first();
+        // kirim ke tampilan baca pakan
+        return view('admin.readSensor.readFeed', ['nilaiSensor' => $latestSensor]);
     }
 }

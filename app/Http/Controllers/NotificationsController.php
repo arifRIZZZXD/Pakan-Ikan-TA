@@ -43,26 +43,26 @@ class NotificationsController extends Controller
                 if ($latestSensor->temp > $tempMax &&
                     (!$lastTempNotification || 
                     $latestSensor->temp !== $lastTempNotification->lastValueTemp || 
-                    ($lastTempNotification && $lastTempNotification->lastValueTemp == $latestSensor->temp && Carbon::parse($lastTempNotification->last_notified_at)->diffInSeconds($currentTime) >= 180))) {
+                    ($lastTempNotification && $lastTempNotification->lastValueTemp == $latestSensor->temp && Carbon::parse($lastTempNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
-                        'category' => 'temp',
-                        'information' => "temp kolam lebih dari $tempMax °C segera periksa area kolam dan fan pada kolam!",
+                        'category' => 'Suhu',
+                        'information' => "Suhu kolam lebih dari $tempMax °C segera periksa area kolam dan fan pada kolam!",
                         'time' => $time,
                         'date' => $date,
                         'lastValueTemp' => $latestSensor->temp,
-                        'last_notified_at' => $currentTime,
+                        'lastNotified_at' => $currentTime,
                     ]);
                 } elseif ($latestSensor->temp < $tempMin &&
                     (!$lastTempNotification || 
                     $latestSensor->temp !== $lastTempNotification->lastValueTemp || 
-                    ($lastTempNotification && $lastTempNotification->lastValueTemp == $latestSensor->temp && Carbon::parse($lastTempNotification->last_notified_at)->diffInSeconds($currentTime) >= 180))) {
+                    ($lastTempNotification && $lastTempNotification->lastValueTemp == $latestSensor->temp && Carbon::parse($lastTempNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
-                        'category' => 'temp',
-                        'information' => "temp kolam kurang dari $tempMin °C segera periksa area kolam dan heater pada kolam!",
+                        'category' => 'Suhu',
+                        'information' => "Suhu kolam kurang dari $tempMin °C segera periksa area kolam dan heater pada kolam!",
                         'time' => $time,
                         'date' => $date,
                         'lastValueTemp' => $latestSensor->temp,
-                        'last_notified_at' => $currentTime,
+                        'lastNotified_at' => $currentTime,
                     ]);
                 }
 
@@ -70,14 +70,14 @@ class NotificationsController extends Controller
                 if ($latestSensor->feed > $feedMax &&
                     (!$lastFeedNotification || 
                     $latestSensor->feed !== $lastFeedNotification->lastValueFeed || 
-                    ($lastFeedNotification && $lastFeedNotification->lastValueFeed == $latestSensor->feed && Carbon::parse($lastFeedNotification->last_notified_at)->diffInSeconds($currentTime) >= 180))) {
+                    ($lastFeedNotification && $lastFeedNotification->lastValueFeed == $latestSensor->feed && Carbon::parse($lastFeedNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
-                        'category' => 'feed',
-                        'information' => "feed ikan hampir habis segera isi ulang feed!",
+                        'category' => 'Pakan',
+                        'information' => "Pakan ikan hampir habis segera isi ulang tabung Pakan!",
                         'time' => $time,
                         'date' => $date,
                         'lastValueFeed' => $latestSensor->feed,
-                        'last_notified_at' => $currentTime,
+                        'lastNotified_at' => $currentTime,
                     ]);
                 }
 
@@ -85,26 +85,26 @@ class NotificationsController extends Controller
                 if ($latestSensor->ph > $phMax &&
                     (!$lastPhNotification || 
                     $latestSensor->ph !== $lastPhNotification->lastValuePh || 
-                    ($lastPhNotification && $lastPhNotification->lastValuePh == $latestSensor->ph && Carbon::parse($lastPhNotification->last_notified_at)->diffInSeconds($currentTime) >= 180))) {
+                    ($lastPhNotification && $lastPhNotification->lastValuePh == $latestSensor->ph && Carbon::parse($lastPhNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
                         'category' => 'Kadar PH',
                         'information' => "Kadar PH lebih dari $phMax segera cek air pada kolam!",
                         'time' => $time,
                         'date' => $date,
                         'lastValuePh' => $latestSensor->ph,
-                        'last_notified_at' => $currentTime,
+                        'lastNotified_at' => $currentTime,
                     ]);
                 } elseif ($latestSensor->ph < $phMin &&
                     (!$lastPhNotification || 
                     $latestSensor->ph !== $lastPhNotification->lastValuePh || 
-                    ($lastPhNotification && $lastPhNotification->lastValuePh == $latestSensor->ph && Carbon::parse($lastPhNotification->last_notified_at)->diffInSeconds($currentTime) >= 180))) {
+                    ($lastPhNotification && $lastPhNotification->lastValuePh == $latestSensor->ph && Carbon::parse($lastPhNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
                         'category' => 'Kadar PH',
                         'information' => "Kadar PH kurang dari $phMin segera cek air pada kolam!",
                         'time' => $time,
                         'date' => $date,
                         'lastValuePh' => $latestSensor->ph,
-                        'last_notified_at' => $currentTime,
+                        'lastNotified_at' => $currentTime,
                     ]);
                 }
             });

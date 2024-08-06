@@ -49,12 +49,17 @@ class ReportsController extends Controller
 
         if ($averageTemperature > $tempMax || $averageTemperature < $tempMin) {
             $warningCount++;
-            $reportInformation .= 'temp dari kolam tidak stabil. ';
+            $reportInformation .= 'temp dari kolam tidak stabil.';
         }
 
         if ($averagePh > $phMax || $averagePh < $phMin) {
             $warningCount++;
-            $reportInformation .= 'PH dari kolam tidak stabil. ';
+            $reportInformation .= 'PH dari kolam tidak stabil.';
+        }
+
+        if ($averageFeed > $feedMax) {
+            $warningCount++;
+            $reportInformation .= 'Pakan hampir habis isi kembali tabung pakan.';
         }
 
         if ($warningCount >= 2) {
@@ -154,7 +159,7 @@ class ReportsController extends Controller
         $feedMax = SettingData::first()->feedMax;
 
         $pdf = Pdf::loadView('admin.reports.pdfDaily', compact('report', 'feedMax'));
-        return $pdf->stream('daily_report_'.$report->date->format('Ymd').'.pdf');
+        return $pdf->download('daily_report_'.$report->date->format('Ymd').'.pdf');
     }
     
 }

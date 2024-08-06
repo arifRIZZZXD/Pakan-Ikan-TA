@@ -64,7 +64,7 @@
             <td>{{ $report->avgPh }}</td>
         </tr>
         <tr>
-            <th>Rata-rata sisa Pakan</th>
+            <th>Sisa Pakan</th>
             <td><span class="badge {{ $report->feedStatusBadge($feedMax) }}">
                 {{ $report->feedStatusText($feedMax) }}
             </span></td>

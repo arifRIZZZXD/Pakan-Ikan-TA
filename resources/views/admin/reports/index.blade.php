@@ -17,7 +17,7 @@
                                         <th>No</th>
                                         <th>Rata-rata Suhu</th>
                                         <th>Rata-rata PH</th>
-                                        <th>Rata-rata SISA Pakan</th>
+                                        <th>Sisa Pakan</th>
                                         <th>Tanggal</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -79,7 +79,7 @@
                                         <td>
                                             @if($weeklyReport['averageFeed'] !== null)
                                                 <span class="badge {{ $weeklyReport['averageFeed'] > $feedMax ? 'badge-danger' : 'badge-success' }}">
-                                                    {{ $weeklyReport['averageFeed'] > $feedMax ? 'feed Hampir Habis' : 'feed Tersedia' }}
+                                                    {{ $weeklyReport['averageFeed'] > $feedMax ? 'Pakan Hampir Habis' : 'Pakan Tersedia' }}
                                                 </span>
                                             @else
                                                 <span class="badge badge-secondary">Tidak Tersedia</span>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreDeviceRequest;
 use App\Http\Requests\UpdateDeviceRequest;
 
@@ -10,54 +11,43 @@ class DeviceController extends Controller
 {
     public function index()
     {
-        return view('admin.device.index');
+        $deviceKey = Device::all();
+        return view('admin.device.index', compact('deviceKey'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'deviceKey' => 'required|unique:registered_devices,deviceKey,' . $id,
+        ]);
+
+        $device = Device::findOrFail($id);
+        $device->update([
+            'deviceKey' => $request->deviceKey,
+        ]);
+
+        return redirect()->route('devices.index')->with('success', 'Device updated successfully.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreDeviceRequest $request)
+    public function destroy($id)
     {
-        //
+        $device = Device::findOrFail($id);
+        $device->delete();
+
+        return redirect()->route('devices.index')->with('success', 'Device deleted successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Device $device)
+    public function getDeviceStatus()
     {
-        //
-    }
+        $devices = Device::all();
+            $status = $devices->map(function ($device) {
+                return [
+                    'deviceKey' => $device->deviceKey,
+                    'lastActive_at' => $device->lastActive_at,
+                    'isActive' => (bool) $device->isActive,
+                ];
+            });
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Device $device)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateDeviceRequest $request, Device $device)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Device $device)
-    {
-        //
+            return response()->json(['status' => $status]);
     }
 }

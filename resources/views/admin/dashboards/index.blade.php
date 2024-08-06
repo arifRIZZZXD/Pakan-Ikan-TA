@@ -67,7 +67,7 @@
                                 <div class="numbers">
                                     <p class="card-category">Jumlah pakan</p>
                                     <h4 class="card-title" id="feed">
-                                        @if($latestSensorData->feed > 9)
+                                        @if($latestSensorData->feed > $feedMax)
                                             <span class="badge badge-danger">Segera isi Pakan!</span>
                                         @else
                                             <span class="badge badge-success">Pakan tersedia</span>
@@ -114,13 +114,19 @@
                         <div class="row align-items-center">
                             <div class="col-icon">
                                 <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                    <i class="fas fa-calendar-alt"></i>
+                                    <i class="fas fa-cogs"></i>
                                 </div>
                             </div>
                             <div class="col col-stats ms-3 ms-sm-0">
                                 <div class="numbers">
-                                    <p class="card-category">Tanggal</p>
-                                    <h4 class="card-title"><span>{{ now()->format('d M Y') }}</span></h4>
+                                    <p class="card-category">Status Alat</p>
+                                    <h4 class="card-title">
+                                        @foreach ($deviceStatus as $device)
+                                            <span class="badge {{ $device['isActive'] ? 'badge-success' : 'badge-danger' }}">
+                                                {{ $device['isActive'] ? 'Terhubung' : 'Terputus' }}
+                                            </span>
+                                        @endforeach
+                                    </h4>
                                 </div>
                             </div>
                         </div>
@@ -207,9 +213,9 @@
                     $('#ph span').first().text(response.latestSensorData.ph);
     
                     if (response.latestSensorData.feed > 9) {
-                        $('#feed span.badge').text('Segera isi feed!').removeClass('badge-success').addClass('badge-danger');
+                        $('#feed span.badge').text('Segera isi pakan!').removeClass('badge-success').addClass('badge-danger');
                     } else {
-                        $('#feed span.badge').text('feed tersedia').removeClass('badge-danger').addClass('badge-success');
+                        $('#feed span.badge').text('Pakan tersedia').removeClass('badge-danger').addClass('badge-success');
                     }
     
                     tempChart.data.labels = response.data1.labels;

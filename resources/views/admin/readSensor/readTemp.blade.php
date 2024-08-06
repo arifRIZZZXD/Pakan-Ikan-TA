@@ -1,6 +1,6 @@
 <?php
 if ($nilaiSensor) {
-    echo $nilaiSensor->ph;
+    echo $nilaiSensor->temp;
 } else {
     echo "Data tidak tersedia";
 }
