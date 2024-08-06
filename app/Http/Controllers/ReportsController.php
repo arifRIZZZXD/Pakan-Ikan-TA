@@ -49,12 +49,12 @@ class ReportsController extends Controller
 
         if ($averageTemperature > $tempMax || $averageTemperature < $tempMin) {
             $warningCount++;
-            $reportInformation .= 'temp dari kolam tidak stabil.';
+            $reportInformation .= 'temp dari aquarium tidak stabil.';
         }
 
         if ($averagePh > $phMax || $averagePh < $phMin) {
             $warningCount++;
-            $reportInformation .= 'PH dari kolam tidak stabil.';
+            $reportInformation .= 'PH dari aquarium tidak stabil.';
         }
 
         if ($averageFeed > $feedMax) {

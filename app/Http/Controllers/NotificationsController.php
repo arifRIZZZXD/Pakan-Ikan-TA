@@ -46,7 +46,7 @@ class NotificationsController extends Controller
                     ($lastTempNotification && $lastTempNotification->lastValueTemp == $latestSensor->temp && Carbon::parse($lastTempNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
                         'category' => 'Suhu',
-                        'information' => "Suhu kolam lebih dari $tempMax °C segera periksa area kolam dan fan pada kolam!",
+                        'information' => "Suhu aquarium lebih dari $tempMax °C segera periksa area aquarium dan fan pada aquarium!",
                         'time' => $time,
                         'date' => $date,
                         'lastValueTemp' => $latestSensor->temp,
@@ -58,7 +58,7 @@ class NotificationsController extends Controller
                     ($lastTempNotification && $lastTempNotification->lastValueTemp == $latestSensor->temp && Carbon::parse($lastTempNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
                         'category' => 'Suhu',
-                        'information' => "Suhu kolam kurang dari $tempMin °C segera periksa area kolam dan heater pada kolam!",
+                        'information' => "Suhu aquarium kurang dari $tempMin °C segera periksa area  dan heater pada aquarium!",
                         'time' => $time,
                         'date' => $date,
                         'lastValueTemp' => $latestSensor->temp,
@@ -88,7 +88,7 @@ class NotificationsController extends Controller
                     ($lastPhNotification && $lastPhNotification->lastValuePh == $latestSensor->ph && Carbon::parse($lastPhNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
                         'category' => 'Kadar PH',
-                        'information' => "Kadar PH lebih dari $phMax segera cek air pada kolam!",
+                        'information' => "Kadar PH lebih dari $phMax segera cek air pada aquarium!",
                         'time' => $time,
                         'date' => $date,
                         'lastValuePh' => $latestSensor->ph,
@@ -100,7 +100,7 @@ class NotificationsController extends Controller
                     ($lastPhNotification && $lastPhNotification->lastValuePh == $latestSensor->ph && Carbon::parse($lastPhNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
                         'category' => 'Kadar PH',
-                        'information' => "Kadar PH kurang dari $phMin segera cek air pada kolam!",
+                        'information' => "Kadar PH kurang dari $phMin segera cek air pada aquarium!",
                         'time' => $time,
                         'date' => $date,
                         'lastValuePh' => $latestSensor->ph,

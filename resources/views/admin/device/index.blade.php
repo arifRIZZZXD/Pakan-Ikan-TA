@@ -17,7 +17,7 @@
                                 <th>No</th>
                                 <th>Key</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -32,12 +32,12 @@
                                             <span class="badge badge-danger">Terputus</span>
                                         @endif
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <button type="button" class="btn btn-dark btn-sm"
                                             data-id="{{ $key->id }}" data-key="{{ $key->deviceKey }}">
                                             <i class="fas fa-pen-square"></i>
                                         </button>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                         </tbody>
