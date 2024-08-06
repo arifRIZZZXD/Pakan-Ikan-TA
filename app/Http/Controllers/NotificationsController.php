@@ -45,8 +45,8 @@ class NotificationsController extends Controller
                     $latestSensor->temp !== $lastTempNotification->lastValueTemp || 
                     ($lastTempNotification && $lastTempNotification->lastValueTemp == $latestSensor->temp && Carbon::parse($lastTempNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
-                        'category' => 'temp',
-                        'information' => "temp kolam lebih dari $tempMax °C segera periksa area kolam dan fan pada kolam!",
+                        'category' => 'Suhu',
+                        'information' => "Suhu kolam lebih dari $tempMax °C segera periksa area kolam dan fan pada kolam!",
                         'time' => $time,
                         'date' => $date,
                         'lastValueTemp' => $latestSensor->temp,
@@ -57,8 +57,8 @@ class NotificationsController extends Controller
                     $latestSensor->temp !== $lastTempNotification->lastValueTemp || 
                     ($lastTempNotification && $lastTempNotification->lastValueTemp == $latestSensor->temp && Carbon::parse($lastTempNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
-                        'category' => 'temp',
-                        'information' => "temp kolam kurang dari $tempMin °C segera periksa area kolam dan heater pada kolam!",
+                        'category' => 'Suhu',
+                        'information' => "Suhu kolam kurang dari $tempMin °C segera periksa area kolam dan heater pada kolam!",
                         'time' => $time,
                         'date' => $date,
                         'lastValueTemp' => $latestSensor->temp,
@@ -72,8 +72,8 @@ class NotificationsController extends Controller
                     $latestSensor->feed !== $lastFeedNotification->lastValueFeed || 
                     ($lastFeedNotification && $lastFeedNotification->lastValueFeed == $latestSensor->feed && Carbon::parse($lastFeedNotification->lastNotified_at)->diffInSeconds($currentTime) >= 180))) {
                     Notification::create([
-                        'category' => 'feed',
-                        'information' => "feed ikan hampir habis segera isi ulang feed!",
+                        'category' => 'Pakan',
+                        'information' => "Pakan ikan hampir habis segera isi ulang tabung Pakan!",
                         'time' => $time,
                         'date' => $date,
                         'lastValueFeed' => $latestSensor->feed,

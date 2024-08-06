@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\settingsController;
+use App\Http\Controllers\Api\SensorDataController;
+use App\Http\Controllers\Api\FeedScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware(['device-key'])->group(function () {
+    //beri data jadwal waktu pakan ke alat
+    Route::get('/time-feed', [FeedScheduleController::class, 'timeFeed']);
+    Route::get('/settings', [settingsController::class, 'settings']);
+    Route::post('/sensor-data', [SensorDataController::class, 'sensors']);
+
 });

@@ -29,6 +29,136 @@
                     <a href="{{ route('feedSchedules.index') }}"><button type="button" class="btn btn-danger mt-3">Close</button></a>
                 </form>
             </div>
+            
+            <div class="col-md-12 card">
+                <div class="card-header">
+                    <h4 class="card-title">Konversi format AM/PM ke format 24 Jam</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-bordered">
+                                <thead class="">
+                                    <tr>
+                                        <th>Format AM</th>
+                                        <th>Format 24 Jam</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>12:00 AM</td>
+                                        <td>00:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>01:00 AM</td>
+                                        <td>01:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>02:00 AM</td>
+                                        <td>02:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>03:00 AM</td>
+                                        <td>03:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                    <td>04:00 AM</td>
+                                    <td>04:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>05:00 AM</td>
+                                        <td>05:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>06:00 AM</td>
+                                        <td>06:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>07:00 AM</td>
+                                        <td>07:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>08:00 AM</td>
+                                        <td>08:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>09:00 AM</td>
+                                        <td>09:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10:00 AM</td>
+                                        <td>10:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11:00 AM</td>
+                                        <td>11:00 WIB</td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-bordered">
+                                    <thead class="">
+                                        <tr>
+                                            <th>Format PM</th>
+                                            <th>Format 24 Jam</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>12:00 PM</td>
+                                            <td>12:00 WIB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>01:00 PM</td>
+                                            <td>13:00 WIB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>02:00 PM</td>
+                                            <td>14:00 WIB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>03:00 PM</td>
+                                            <td>15:00 WIB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>04:00 PM</td>
+                                            <td>16:00 WIB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>05:00 PM</td>
+                                            <td>17:00 WIB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>06:00 PM</td>
+                                            <td>18:00 WIB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>07:00 PM</td>
+                                            <td>19:00 WIB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>08:00 PM</td>
+                                            <td>20:00 WIB</td>
+                                        </tr>
+                                    <tr>
+                                        <td>09:00 PM</td>
+                                        <td>21:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10:00 PM</td>
+                                        <td>22:00 WIB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11:00 PM</td>
+                                        <td>23:00 WIB</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
