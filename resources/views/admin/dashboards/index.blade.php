@@ -138,7 +138,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Grafik Temperatur Kolam</div>
+                        <div class="card-title">Grafik Suhu</div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
@@ -152,7 +152,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Grafik Kadar PH Kolam</div>
+                        <div class="card-title">Grafik Kadar PH</div>
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
