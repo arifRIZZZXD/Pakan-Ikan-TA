@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Dashboard routes
     Route::resource('dashboard', DashboardController::class);
+    Route::get('/get-device-status', [DashboardController::class, 'getDeviceStatus']);
     Route::get('/get-latest-sensor-data', [DashboardController::class, 'getLatestSensorData']);
 
     // Settings routes
