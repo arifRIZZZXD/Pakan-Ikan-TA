@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Models\Sensor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Exception; // Import kelas Exception untuk menangkap pengecualian
 
-class SensorDataController extends Controller
+class SensorsDataController extends Controller
 {
     public function sensors(Request $request)
     {

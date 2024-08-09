@@ -120,7 +120,7 @@
                             <div class="col col-stats ms-3 ms-sm-0">
                                 <div class="numbers">
                                     <p class="card-category">Status Alat</p>
-                                    <h4 class="card-title">
+                                    <h4 class="card-title" id="device-status">
                                         @foreach ($deviceStatus as $device)
                                             <span class="badge {{ $device['isActive'] ? 'badge-success' : 'badge-danger' }}">
                                                 {{ $device['isActive'] ? 'Terhubung' : 'Terputus' }}
@@ -203,7 +203,7 @@
                 }
             }
         });
-    
+
         function fetchLatestData() {
             $.ajax({
                 url: '/get-latest-sensor-data',
@@ -211,25 +211,42 @@
                 success: function (response) {
                     $('#temp span').first().text(response.latestSensorData.temp);
                     $('#ph span').first().text(response.latestSensorData.ph);
-    
+
                     if (response.latestSensorData.feed > 9) {
                         $('#feed span.badge').text('Segera isi pakan!').removeClass('badge-success').addClass('badge-danger');
                     } else {
                         $('#feed span.badge').text('Pakan tersedia').removeClass('badge-danger').addClass('badge-success');
                     }
-    
+
                     tempChart.data.labels = response.data1.labels;
                     tempChart.data.datasets[0].data = response.data1.datasets[0].data;
                     tempChart.update();
-    
+
                     phChart.data.labels = response.data2.labels;
                     phChart.data.datasets[0].data = response.data2.datasets[0].data;
                     phChart.update();
                 }
             });
         }
-    
+
+        function fetchDeviceStatus() {
+            $.ajax({
+                url: '/get-device-status',
+                method: 'GET',
+                success: function (deviceStatus) {
+                    let statusHtml = '';
+                    deviceStatus.forEach(device => {
+                        statusHtml += `<span class="badge ${device.isActive ? 'badge-success' : 'badge-danger'}">
+                                       ${device.isActive ? 'Terhubung' : 'Terputus'}
+                                       </span>`;
+                    });
+                    $('#device-status').html(statusHtml);
+                }
+            });
+        }
+
         setInterval(fetchLatestData, 5000); // Memanggil fetchLatestData setiap 5 detik
+        setInterval(fetchDeviceStatus, 5000); // Memanggil fetchDeviceStatus setiap 5 detik
     });
-    </script>
+</script>
 @endsection

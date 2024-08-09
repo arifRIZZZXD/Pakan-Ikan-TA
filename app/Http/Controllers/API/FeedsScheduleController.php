@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Models\FeedSchedules;
@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
-class FeedScheduleController extends Controller
+class FeedsScheduleController extends Controller
 {
     public function timeFeed(Request $request)
         {

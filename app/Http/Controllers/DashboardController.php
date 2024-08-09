@@ -61,6 +61,20 @@ class DashboardController extends Controller
         return view('admin.dashboards.index', compact('data1', 'data2', 'latestSensorData', 'nextFeedSchedule', 'feedMax', 'deviceStatus',));
     }
 
+    public function getDeviceStatus()
+{
+    $devices = Device::all();
+    $deviceStatus = $devices->map(function ($device) {
+        return [
+            'deviceKey' => $device->deviceKey,
+            'lastActive_at' => $device->lastActive_at,
+            'isActive' => (bool) $device->isActive,
+        ];
+    });
+
+    return response()->json($deviceStatus);
+}
+
     private function getNextFeedSchedule()
     {
         $now = Carbon::now('Asia/Jakarta');
