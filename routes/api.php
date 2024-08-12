@@ -23,8 +23,9 @@ use App\Http\Controllers\Api\FeedScheduleController;
 
 Route::middleware(['device-key'])->group(function () {
     //beri data jadwal waktu pakan ke alat
-    Route::get('/time-feed', [FeedScheduleController::class, 'timeFeed']);
-    Route::get('/settings', [settingsController::class, 'settings']);
-    Route::post('/sensor-data', [SensorDataController::class, 'sensors']);
+    Route::get('/time-feed', 'App\Http\Controllers\FeedScheduleController@timeFeed');
+    Route::get('/settings', 'App\Http\Controllers\SettingsController@settings');
+    Route::post('/sensor-data', 'App\Http\Controllers\SensorDataController@sensors');
+
 
 });
