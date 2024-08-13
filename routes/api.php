@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\SensorsDataController;
-use App\Http\Controllers\Api\FeedsScheduleController;
+use App\Http\Controllers\Api\FeedsSchedulesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ use App\Http\Controllers\Api\FeedsScheduleController;
 
 Route::middleware(['device-key'])->group(function () {
     //beri data jadwal waktu pakan ke alat
-    Route::get('/time-feed', [FeedsScheduleController::class, 'timeFeed']);
+    Route::get('/time-feed', [FeedsSchedulesController::class, 'timeFeed']);
     Route::get('/settings', [SettingsController::class, 'settings']);
     Route::post('/sensor-data', [SensorsDataController::class, 'sensors']);
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Models\Device;
 use App\Models\Sensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http; // Pastikan ini diimport untuk melakukan HTTP request
+
 
 class TelegramController extends Controller
 {
