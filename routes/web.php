@@ -10,6 +10,7 @@ use App\Http\Controllers\SettingDataController;
 use App\Http\Controllers\SettingToolsController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\SensorController;
+use App\Http\Controllers\TelegramController;
 use App\Models\Device;
 use App\Models\FeedSchedules;
 
@@ -69,4 +70,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/readTemp', [SensorController::class, 'readTemp'])->name('readTemp');
     Route::get('/readPh', [SensorController::class, 'readPh'])->name('readPh');
     Route::get('/readFeed', [SensorController::class, 'readFeed'])->name('readFeed');
+
+    // bot tele
 });
+Route::post('/webhook/telegram', [TelegramController::class, 'handleWebhook']);

@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\settingsController;
-use App\Http\Controllers\Api\SensorDataController;
-use App\Http\Controllers\Api\FeedScheduleController;
+use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\Api\SensorsDataController;
+use App\Http\Controllers\Api\FeedsSchedulesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +23,8 @@ use App\Http\Controllers\Api\FeedScheduleController;
 
 Route::middleware(['device-key'])->group(function () {
     //beri data jadwal waktu pakan ke alat
-    Route::get('/time-feed', [FeedScheduleController::class, 'timeFeed']);
-    Route::get('/settings', [settingsController::class, 'settings']);
-    Route::post('/sensor-data', [SensorDataController::class, 'sensors']);
+    Route::get('/time-feed', [FeedsSchedulesController::class, 'timeFeed']);
+    Route::get('/settings', [SettingsController::class, 'settings']);
+    Route::post('/sensor-data', [SensorsDataController::class, 'sensors']);
 
 });
