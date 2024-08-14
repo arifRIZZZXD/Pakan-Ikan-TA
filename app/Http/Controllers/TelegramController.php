@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Models\Device;
 use App\Models\Sensor;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class TelegramController extends Controller
                 'text' => $message,
             ]);
 
-            \Log::info('Telegram response: ' . $response->body());
+            Log::info('Telegram response: ' . $response->body());
         } catch (\Exception $e) {
             \Log::error('Error sending message to Telegram: ' . $e->getMessage());
         }
